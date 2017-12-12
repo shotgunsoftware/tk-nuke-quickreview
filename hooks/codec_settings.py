@@ -9,7 +9,7 @@
 # not expressly granted therein are reserved by Shotgun Software Inc.
 
 """
-Hook that controls codec settings when generating quick dailies for review
+Hook that controls codec settings when generating quicktimes
 """
 import sgtk
 import os
