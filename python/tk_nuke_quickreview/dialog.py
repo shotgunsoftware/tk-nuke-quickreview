@@ -25,7 +25,7 @@ class Dialog(QtGui.QWidget):
     Main dialog window for the App
     """
 
-    def __init__(self, parent=None):
+    def __init__(self, nuke_review_node, parent=None):
         """
         :param parent: The parent QWidget for this control
         """
@@ -36,6 +36,8 @@ class Dialog(QtGui.QWidget):
         # set up the UI
         self.ui = Ui_Dialog()
         self.ui.setupUi(self)
+
+        self._nuke_review_node = nuke_review_node
 
     def _get_first_frame(self):
         """

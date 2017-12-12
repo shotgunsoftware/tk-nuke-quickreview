@@ -54,11 +54,15 @@ class NukeQuickReview(sgtk.platform.Application):
         nk_file = nk_file.replace(os.sep, "/")
         nuke.nodePaste(nk_file)
 
-
     def create_review(self, group_node):
         """
         Called from the gizmo when the review button is pressed.
         """
         tk_nuke_quickreview = self.import_module("tk_nuke_quickreview")
-        self.engine.show_dialog("Submit for Review", self, tk_nuke_quickreview.Dialog)
+        self.engine.show_dialog(
+            "Submit for Review",
+            self,
+            tk_nuke_quickreview.Dialog,
+            nuke_review_node=group_node
+        )
 
