@@ -10,6 +10,7 @@
 
 import sgtk
 import sys
+import os
 import nuke
 import datetime
 
@@ -89,6 +90,36 @@ class Settings(HookBaseClass):
         return_data["slate"] = slate_items
 
         return return_data
+
+    def get_title(self):
+        """
+        Returns the title used for the version
+        """
+
+        # rather than doing a version numbering scheme, which we
+        # reserve for publishing workflows, the default implementation
+        # uses a date and time based naming scheme
+
+        # default name in case no nuke file name is set
+        name = "Nuke Quickreview"
+
+        # now try to see if we are in a normal work file
+        # in that case deduce the name from it
+        current_scene_path = nuke.root().name()
+        if current_scene_path and current_scene_path != "Root":
+            current_scene_path = current_scene_path.replace("/", os.path.sep)
+            # get just filename
+            current_scene_name = os.path.basename(current_scene_path)
+            # drop .nk
+            current_scene_name = os.path.splitext(current_scene_name)[0]
+            name = current_scene_name.replace("_", " ").capitalize()
+
+        # append date and time
+        timestamp = datetime.datetime.now().strftime("%d %b %Y %H:%M")
+        sg_version_name = "%s %s" % (name, timestamp)
+
+        return sg_version_name
+
 
     def get_resolution(self):
         """

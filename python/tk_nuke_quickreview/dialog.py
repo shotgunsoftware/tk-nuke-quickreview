@@ -20,6 +20,7 @@ from .ui.dialog import Ui_Dialog
 
 logger = sgtk.platform.get_logger(__name__)
 overlay = sgtk.platform.import_framework("tk-framework-qtwidgets", "overlay_widget")
+sg_data = sgtk.platform.import_framework("tk-framework-shotgunutils", "shotgun_data")
 
 
 class Dialog(QtGui.QWidget):
@@ -37,6 +38,12 @@ class Dialog(QtGui.QWidget):
         self._bundle = sgtk.platform.current_bundle()
         self._group_node = nuke_review_node
 
+        # set up data retriever
+        self.__sg_data = sg_data.ShotgunDataRetriever(self)
+        self.__sg_data.work_completed.connect(self.__on_worker_signal)
+        self.__sg_data.work_failure.connect(self.__on_worker_failure)
+        self.__sg_data.start()
+
         # set up the UI
         self.ui = Ui_Dialog()
         self.ui.setupUi(self)
@@ -49,9 +56,20 @@ class Dialog(QtGui.QWidget):
         self.ui.frame_range.setText(
             "Frame Range: %s-%s" % (self._get_first_frame(), self._get_last_frame())
         )
-        self.ui.association.setText("Assocated with: %s" % self._bundle.context)
+        self.ui.association.setText("Associated with: %s" % self._bundle.context)
         self.ui.title.setText(self._generate_title())
 
+    def closeEvent(self, event):
+        """
+        Executed when the dialog is closed.
+        """
+        try:
+            self.__sg_data.stop()
+        except Exception:
+            logger.exception("Error running Loader App closeEvent()")
+
+        # okay to close dialog
+        event.accept()
 
     def _get_first_frame(self):
         """
@@ -69,24 +87,7 @@ class Dialog(QtGui.QWidget):
         """
         Create a title for the version
         """
-        name = "Quickdaily"
-
-        # now try to see if we are in a normal work file
-        # in that case deduce the name from it
-        current_scene_path = nuke.root().name()
-        if current_scene_path and current_scene_path != "Root":
-            current_scene_path = current_scene_path.replace("/", os.path.sep)
-            # get just filename
-            current_scene_name = os.path.basename(current_scene_path)
-            # drop .nk
-            current_scene_name = os.path.splitext(current_scene_name)[0]
-            name = current_scene_name
-
-        # append date and time
-        timestamp = datetime.datetime.now().strftime("%d %b %Y %H:%M:%S")
-
-        sg_version_name = "%s %s" % (name, timestamp)
-        return sg_version_name
+        return self._bundle.execute_hook_method("settings_hook", "get_title")
 
     def _setup_formatting(self, sg_version_name):
         """
@@ -162,40 +163,27 @@ class Dialog(QtGui.QWidget):
             # turn off the nodes again
             mov_out.knob("disable").setValue(True)
 
+    def _navigate_to_version_and_close(self, panel_app, version_id):
+        """
+        Navigates to the given version in the given panel app
+        and then closes this window.
+        """
+        panel_app.navigate("Version", version_id, panel_app.NEW_DIALOG)
+        self.close()
+
     def _submit(self):
         """
         Submits the render for review.
         """
         try:
             self._overlay.start_spin()
-            version_id = self._run_submission()
+            self._version_id = self._run_submission()
 
         except Exception, e:
-            logger.exception("Something bad happened.")
+            logger.exception("An exception was raised.")
             self._overlay.show_error_message("An error was reported: %s" % e)
 
-        else:
-            self._overlay.hide()
-            # show success screen
-            self.ui.stack_widget.setCurrentIndex(1)
-            # show button if we have panel loaded
-            for app in self._bundle.engine.apps.values():
-                if app.name == "tk-multi-shotgunpanel":
-                    # panel is loaded
-                    launch_panel_fn = lambda: app.navigate("Version", version_id, app.PANEL)
-                    self.ui.jump_to_review.clicked.connect(launch_panel_fn )
-                else:
-                    # no panel, so hide button
-                    self.ui.jump_to_review.hide()
-
-        finally:
-            # hide cancel button, turn submit button into a close button
-            self.ui.cancel.hide()
-            self.ui.submit.setText("Close")
-            self.ui.submit.clicked.connect(self.close)
-
-    @sgtk.LogManager.log_timing
-    def _upload_to_shotgun(self, version_id, file_name):
+    def _upload_to_shotgun(self, shotgun, data):
         """
         Upload quicktime to Shotgun.
 
@@ -203,13 +191,16 @@ class Dialog(QtGui.QWidget):
         :param str file_name: Quicktime to upload
         """
         logger.debug("Uploading movie to Shotgun...")
-        self._bundle.shotgun.upload(
-            "Version",
-            version_id,
-            file_name,
-            "sg_uploaded_movie"
-        )
-        logger.debug("Upload complete")
+        try:
+            shotgun.upload(
+                "Version",
+                data["version_id"],
+                data["file_name"],
+                "sg_uploaded_movie"
+            )
+            logger.debug("...Upload complete!")
+        finally:
+            sgtk.util.filesystem.safe_delete_file(data["file_name"])
 
     def _run_submission(self):
         """
@@ -228,38 +219,67 @@ class Dialog(QtGui.QWidget):
         self._setup_formatting(version_title)
 
         # generate temp file for mov sequence
-        mov_folder = tempfile.mkdtemp()
-        mov_path = os.path.join(mov_folder, "%s.mov" % version_title.replace(" ", "_"))
+        mov_path = os.path.join(tempfile.gettempdir(), "quickreview.mov")
+        mov_path = sgtk.util.filesystem.get_unused_path(mov_path)
 
-        try:
-            # and render!
-            self._render(mov_path)
+        # and render!
+        self._render(mov_path)
 
-            # create sg version
-            data = {
-                "code": version_title,
-                "description": message,
-                "project": self._bundle.context.project,
-                "entity": self._bundle.context.entity,
-                "sg_task": self._bundle.context.task,
-                "created_by": sgtk.util.get_current_user(self._bundle.sgtk),
-                "user": sgtk.util.get_current_user(self._bundle.sgtk),
-                "sg_first_frame": self._get_first_frame(),
-                "sg_last_frame": self._get_last_frame(),
-                "frame_count": (self._get_last_frame() - self._get_first_frame()) + 1,
-                "frame_range": "%d-%d" % (self._get_first_frame(), self._get_last_frame()),
-                "sg_movie_has_slate": True
-            }
+        # create sg version
+        data = {
+            "code": version_title,
+            "description": message,
+            "project": self._bundle.context.project,
+            "entity": self._bundle.context.entity,
+            "sg_task": self._bundle.context.task,
+            "created_by": sgtk.util.get_current_user(self._bundle.sgtk),
+            "user": sgtk.util.get_current_user(self._bundle.sgtk),
+            "sg_first_frame": self._get_first_frame(),
+            "sg_last_frame": self._get_last_frame(),
+            "frame_count": (self._get_last_frame() - self._get_first_frame()) + 1,
+            "frame_range": "%d-%d" % (self._get_first_frame(), self._get_last_frame()),
+            "sg_movie_has_slate": True
+        }
 
-            entity = self._bundle.shotgun.create("Version", data)
-            logger.debug("Version created in Shotgun %s" % entity)
-            self._upload_to_shotgun(entity["id"], mov_path)
+        entity = self._bundle.shotgun.create("Version", data)
+        logger.debug("Version created in Shotgun %s" % entity)
 
-        finally:
-            # clean up
-            sgtk.util.filesystem.safe_delete_file(mov_path)
+        data = {"version_id": entity["id"], "file_name": mov_path}
+        self.__sg_data.execute_method(self._upload_to_shotgun, data)
 
         return entity["id"]
 
+    def __on_worker_failure(self, uid, msg):
+        """
+        Asynchronous callback - the worker thread errored.
+        """
+        self._overlay.show_error_message("An error was reported: %s" % msg)
+        self.ui.submit.hide()
+        self.ui.cancel.setText("Close")
 
+    def __on_worker_signal(self, uid, request_type, data):
+        """
+        Signaled whenever the worker completes something.
+        """
+        self._overlay.hide()
+        # show success screen
+        self.ui.stack_widget.setCurrentIndex(1)
+        # show button if we have panel loaded
+        found_panel = False
+        for app in self._bundle.engine.apps.values():
+            if app.name == "tk-multi-shotgunpanel":
+                # panel is loaded
+                launch_panel_fn = lambda panel_app=app: self._navigate_to_version_and_close(
+                    panel_app,
+                    self._version_id
+                )
+                self.ui.jump_to_review.clicked.connect(launch_panel_fn)
+                found_panel = True
 
+        if not found_panel:
+            # no panel, so hide button
+            self.ui.jump_to_review.hide()
+
+        # hide submit button, turn cancel button into a close button
+        self.ui.submit.hide()
+        self.ui.cancel.setText("Close")
