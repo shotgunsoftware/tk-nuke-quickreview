@@ -57,7 +57,16 @@ class Dialog(QtGui.QWidget):
             "Frame Range: %s-%s" % (self._get_first_frame(), self._get_last_frame())
         )
         self.ui.association.setText("Associated with: %s" % self._bundle.context)
+        self.ui.association.setToolTip(
+            "Your review version in Shotgun will be "
+            "associated with this context. To change this, "
+            "change your work area using the shotgun panel "
+            "or file manager."
+        )
         self.ui.title.setText(self._generate_title())
+
+        # set focus on comments text box.
+        self.ui.comments.setFocus()
 
     def closeEvent(self, event):
         """

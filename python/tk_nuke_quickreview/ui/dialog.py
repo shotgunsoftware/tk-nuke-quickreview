@@ -35,6 +35,10 @@ class Ui_Dialog(object):
         self.association = QtGui.QLabel(self.page)
         self.association.setObjectName("association")
         self.verticalLayout.addWidget(self.association)
+        self.label_2 = QtGui.QLabel(self.page)
+        self.label_2.setText("")
+        self.label_2.setObjectName("label_2")
+        self.verticalLayout.addWidget(self.label_2)
         self.label = QtGui.QLabel(self.page)
         self.label.setObjectName("label")
         self.verticalLayout.addWidget(self.label)
@@ -98,10 +102,10 @@ class Ui_Dialog(object):
 
     def retranslateUi(self, Dialog):
         Dialog.setWindowTitle(QtGui.QApplication.translate("Dialog", "Shotgun Publish", None, QtGui.QApplication.UnicodeUTF8))
-        self.label_3.setText(QtGui.QApplication.translate("Dialog", "Title:", None, QtGui.QApplication.UnicodeUTF8))
+        self.label_3.setText(QtGui.QApplication.translate("Dialog", "Review Title:", None, QtGui.QApplication.UnicodeUTF8))
         self.frame_range.setText(QtGui.QApplication.translate("Dialog", "Frame Range: 1-200", None, QtGui.QApplication.UnicodeUTF8))
         self.association.setText(QtGui.QApplication.translate("Dialog", "Associated with: Task 123, Shot 123", None, QtGui.QApplication.UnicodeUTF8))
-        self.label.setText(QtGui.QApplication.translate("Dialog", "Comments", None, QtGui.QApplication.UnicodeUTF8))
+        self.label.setText(QtGui.QApplication.translate("Dialog", "Comments:", None, QtGui.QApplication.UnicodeUTF8))
         self.label_8.setText(QtGui.QApplication.translate("Dialog", "Upload Complete!", None, QtGui.QApplication.UnicodeUTF8))
         self.jump_to_review.setText(QtGui.QApplication.translate("Dialog", "Jump to Review Version", None, QtGui.QApplication.UnicodeUTF8))
         self.cancel.setText(QtGui.QApplication.translate("Dialog", "Cancel", None, QtGui.QApplication.UnicodeUTF8))
