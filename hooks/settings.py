@@ -1,4 +1,4 @@
-# Copyright (c) 2015 Shotgun Software Inc.
+# Copyright (c) 2017 Shotgun Software Inc.
 # 
 # CONFIDENTIAL AND PROPRIETARY
 # 
@@ -8,29 +8,102 @@
 # agreement to the Shotgun Pipeline Toolkit Source Code License. All rights 
 # not expressly granted therein are reserved by Shotgun Software Inc.
 
-"""
-Hook that controls codec settings when generating quicktimes
-"""
 import sgtk
-import os
 import sys
-
 import nuke
+import datetime
 
 HookBaseClass = sgtk.get_hook_baseclass()
 
-class CodecSettings(HookBaseClass):
 
-    def get_quicktime_settings(self, write_node, **kwargs):
+class Settings(HookBaseClass):
+    """
+    Controls various review settings and formatting.
+    """
+
+    def get_burnins_and_slate(self, sg_version_name):
         """
-        Allows modifying default settings for Quicktime generation.
-        Returns a dictionary of settings to be used for the Write Node that generates
-        the Quicktime in Nuke.
+        Return the burnins used for the quicktime.
+
+        Should return a dictionary with the following items
+
+        {
+            "slate": ["Name: lighting.v003.nk", "..."] # list of lines for slate
+            "top_right": "Top right burnin"
+            "top_left": "Top left burnin"
+            "bottom_left": "Bottom left burnin"
+        }
+
+        .. note::
+            The bottom right burnin is used as a frame counter.
+
+        :param str sg_version_name: The name of the shotgun review version
+        :returns: Dictionary with burnins and slate strings
+        """
+        context = self.parent.context
+
+        return_data = {}
+
+        # current user
+        user_data = sgtk.util.get_current_user(self.parent.sgtk)
+        if user_data is None:
+            user_name = "Unknown User"
+        else:
+            user_name = user_data.get("name", "Unknown User")
+
+        # top-left says
+        # Project XYZ
+        # Shot ABC
+        top_left = "%s" % context.project["name"]
+        if context.entity:
+            top_left += "\n%s %s" % (context.entity["type"], context.entity["name"])
+        return_data["top_left"] = top_left
+
+        # top-right has date
+        # The format '23 Jan 2012' is universally understood.
+        today = datetime.date.today()
+        date_formatted = today.strftime("%d %b %Y")
+        return_data["top_right"] = date_formatted
+
+        # bottom left says
+        # sg version name
+        # User
+        bottom_left = "%s\n%s" % (sg_version_name, user_name)
+        return_data["bottom_left"] = bottom_left
+
+        # and format the slate
+        slate_items = []
+        slate_items.append("Project: %s" % context.project["name"])
+        if context.entity:
+            slate_items.append("%s: %s" % (context.entity["type"], context.entity["name"]))
+        slate_items.append("Name: %s" % sg_version_name)
+
+        if context.task:
+            slate_items.append("Task: %s" % context.task["name"])
+        elif context.step:
+            slate_items.append("Step: %s" % context.step["name"])
+
+        slate_items.append("Date: %s" % date_formatted)
+        slate_items.append("User: %s" % user_name)
+
+        return_data["slate"] = slate_items
+
+        return return_data
+
+    def get_resolution(self):
+        """
+        Returns the resolution
+
+        :returns: tuple with (width, height)
+        """
+        return 1280, 720
+
+    def setup_quicktime_node(self, write_node):
+        """
+        Allows modifying settings for Quicktime generation.
 
         :param write_node: Nuke Write node 
         """
-        settings = {}
-
         if sys.platform == "linux2":
             if nuke.NUKE_VERSION_MAJOR >= 9:
                 # Nuke 9.0v1 removed ffmpeg and replaced it with the mov64 writer

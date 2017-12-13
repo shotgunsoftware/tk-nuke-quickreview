@@ -17,7 +17,7 @@
    <item>
     <widget class="QStackedWidget" name="stack_widget">
      <property name="currentIndex">
-      <number>1</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="page">
       <layout class="QVBoxLayout" name="verticalLayout">
@@ -60,12 +60,8 @@
         <widget class="QTextEdit" name="comments"/>
        </item>
       </layout>
-      <zorder>horizontalSpacer</zorder>
       <zorder></zorder>
-      <zorder>cancel</zorder>
-      <zorder>submit</zorder>
       <zorder>association</zorder>
-      <zorder></zorder>
       <zorder>comments</zorder>
       <zorder>frame_range</zorder>
       <zorder>label</zorder>

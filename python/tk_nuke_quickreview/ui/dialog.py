@@ -93,7 +93,7 @@ class Ui_Dialog(object):
         self.verticalLayout_2.addLayout(self.horizontalLayout_2)
 
         self.retranslateUi(Dialog)
-        self.stack_widget.setCurrentIndex(1)
+        self.stack_widget.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
 
     def retranslateUi(self, Dialog):

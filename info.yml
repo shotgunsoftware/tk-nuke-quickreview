@@ -1,4 +1,4 @@
-# Copyright (c) 2013 Shotgun Software Inc.
+# Copyright (c) 2017 Shotgun Software Inc.
 # 
 # CONFIDENTIAL AND PROPRIETARY
 # 
@@ -13,23 +13,21 @@
 # expected fields in the configuration file for this app
 configuration:
 
-    codec_settings_hook:
+    settings_hook:
         type: hook
-        description: Hook for customizing codec settings used when generating quickdaily items
-                     for review.
-        default_value: '{self}/codec_settings.py'
-       
+        description: Hook for customizing settings and behavior.
+        default_value: '{self}/settings.py'
 
 # the Shotgun fields that this app needs in order to operate correctly
 requires_shotgun_fields:
 
 # More verbose description of this item 
 display_name: "Quickreview Node"
-description: "A custom Nuke node that creates a quicktime and uploads it to Shotgun for Review."
+description: "A custom Nuke node that creates a quicktime and uploads it to Shotgun for review."
 
 # Required minimum versions for this item to run
 requires_shotgun_version:
-requires_core_version: "v0.14.12"
+requires_core_version: "v0.18.00"
 requires_engine_version: "v0.2.3"
 
 # the engines that this app can operate in:

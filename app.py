@@ -1,4 +1,4 @@
-# Copyright (c) 2013 Shotgun Software Inc.
+# Copyright (c) 2017 Shotgun Software Inc.
 # 
 # CONFIDENTIAL AND PROPRIETARY
 # 
@@ -8,31 +8,27 @@
 # agreement to the Shotgun Pipeline Toolkit Source Code License. All rights 
 # not expressly granted therein are reserved by Shotgun Software Inc.
 
-"""
-Quick versions to shotgun from Nuke
-
-"""
 
 import sgtk
 import nuke
 import os
 
+
 class NukeQuickReview(sgtk.platform.Application):
     """
-    Toolkit App which sends items to Shotgun for review.
+    App that creates a Nuke node that sends items to Shotgun for review.
     """
 
     def init_app(self):
         """
         Called as the application is being initialized
         """
-        
-        # assign this app to nuke handle so that the node
-        # callback finds it
+        # assign this app to nuke handle so that the gizmo finds it
         nuke.tk_nuke_quickreview = self
 
-        # add to sgtk menu
+        # add to nuke node menu
         icon = os.path.join(self.disk_location, "resources", "node_icon.png")
+
         self.engine.register_command(
             "Shotgun Quick Review",
             self.create_node,
@@ -57,6 +53,8 @@ class NukeQuickReview(sgtk.platform.Application):
     def create_review(self, group_node):
         """
         Called from the gizmo when the review button is pressed.
+
+        :param group_node: The nuke node that was clicked.
         """
         tk_nuke_quickreview = self.import_module("tk_nuke_quickreview")
         self.engine.show_dialog(
