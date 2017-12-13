@@ -8,17 +8,18 @@
 # agreement to the Shotgun Pipeline Toolkit Source Code License. All rights 
 # not expressly granted therein are reserved by Shotgun Software Inc.
 
-import nukescripts
+import os
 import nuke
 import sgtk
+import datetime
+import tempfile
 from sgtk import TankError
 from sgtk.platform.qt import QtCore, QtGui
 
 from .ui.dialog import Ui_Dialog
 
 logger = sgtk.platform.get_logger(__name__)
-
-overlay_widget = sgtk.platform.import_framework("tk-framework-qtwidgets", "overlay_widget")
+overlay = sgtk.platform.import_framework("tk-framework-qtwidgets", "overlay_widget")
 
 class Dialog(QtGui.QWidget):
     """
@@ -33,11 +34,17 @@ class Dialog(QtGui.QWidget):
 
         self._bundle = sgtk.platform.current_bundle()
 
+
         # set up the UI
         self.ui = Ui_Dialog()
         self.ui.setupUi(self)
 
-        self._nuke_review_node = nuke_review_node
+        self._overlay = overlay.ShotgunOverlayWidget(self)
+
+        self._group_node = nuke_review_node
+
+        self.ui.submit.clicked.connect(self._submit)
+        self.ui.cancel.clicked.connect(self.close)
 
     def _get_first_frame(self):
         """
@@ -51,19 +58,18 @@ class Dialog(QtGui.QWidget):
         """
         return int(nuke.root()["last_frame"].value())
 
-    def _setup_formatting(self, group_node, sg_version_name):
+    def _setup_formatting(self, sg_version_name):
         """
         Sets up slates and burnins
         """
-
         # set the fonts for all text fields
-        font = os.path.join(self.disk_location, "resources", "OpenSans-Regular.ttf")
+        font = os.path.join(self._bundle.disk_location, "resources", "OpenSans-Regular.ttf")
         font = font.replace(os.sep, "/")
-        group_node.node("top_left_text")["font"].setValue(font)
-        group_node.node("top_right_text")["font"].setValue(font)
-        group_node.node("bottom_left_text")["font"].setValue(font)
-        group_node.node("framecounter")["font"].setValue(font)
-        group_node.node("slate_info")["font"].setValue(font)
+        self._group_node.node("top_left_text")["font"].setValue(font)
+        self._group_node.node("top_right_text")["font"].setValue(font)
+        self._group_node.node("bottom_left_text")["font"].setValue(font)
+        self._group_node.node("framecounter")["font"].setValue(font)
+        self._group_node.node("slate_info")["font"].setValue(font)
 
         # get some useful data
 
@@ -72,7 +78,7 @@ class Dialog(QtGui.QWidget):
         date_formatted = today.strftime("%d %b %Y")
 
         # current user
-        user_data = sgtk.util.get_current_user(self.sgtk)
+        user_data = sgtk.util.get_current_user(self._bundle.sgtk)
         if user_data is None:
             user_name = "Unknown User"
         else:
@@ -83,56 +89,56 @@ class Dialog(QtGui.QWidget):
         # top-left says
         # Project XYZ
         # Shot ABC
-        top_left = "%s" % self.context.project["name"]
-        if self.context.entity:
-            top_left += "\n%s %s" % (self.context.entity["type"], self.context.entity["name"])
+        top_left = "%s" % self._bundle.context.project["name"]
+        if self._bundle.context.entity:
+            top_left += "\n%s %s" % (self._bundle.context.entity["type"], self._bundle.context.entity["name"])
 
-        group_node.node("top_left_text")["message"].setValue(top_left)
+        self._group_node.node("top_left_text")["message"].setValue(top_left)
 
         # top-right has date
-        group_node.node("top_right_text")["message"].setValue(date_formatted)
+        self._group_node.node("top_right_text")["message"].setValue(date_formatted)
 
         # bottom left says
         # Name#increment
         # User
         bottom_left = "%s\n%s" % (sg_version_name, user_name)
-        group_node.node("bottom_left_text")["message"].setValue(bottom_left)
+        self._group_node.node("bottom_left_text")["message"].setValue(bottom_left)
 
         # and the slate
-        slate_str = "Project: %s\n" % self.context.project["name"]
-        if self.context.entity:
-            slate_str += "%s: %s\n" % (self.context.entity["type"], self.context.entity["name"])
+        slate_str = "Project: %s\n" % self._bundle.context.project["name"]
+        if self._bundle.context.entity:
+            slate_str += "%s: %s\n" % (self._bundle.context.entity["type"], self._bundle.context.entity["name"])
         slate_str += "Name: %s\n" % sg_version_name
 
-        if self.context.task:
-            slate_str += "Task: %s\n" % self.context.task["name"]
-        elif self.context.step:
-            slate_str += "Step: %s\n" % self.context.step["name"]
+        if self._bundle.context.task:
+            slate_str += "Task: %s\n" % self._bundle.context.task["name"]
+        elif self._bundle.context.step:
+            slate_str += "Step: %s\n" % self._bundle.context.step["name"]
 
         slate_str += "Frames: %s - %s\n" % (self._get_first_frame(), self._get_last_frame())
         slate_str += "Date: %s\n" % date_formatted
         slate_str += "User: %s\n" % user_name
 
-        group_node.node("slate_info")["message"].setValue(slate_str)
+        self._group_node.node("slate_info")["message"].setValue(slate_str)
 
-    def _render(self, group_node, mov_path):
+    def _render(self, mov_path):
         """
         Renders quickdaily node
         """
         # setup quicktime output resolution
         width = 1280
         height = 720
-        mov_reformat_node = group_node.node("mov_reformat")
+        mov_reformat_node = self._group_node.node("mov_reformat")
         mov_reformat_node["box_width"].setValue(width)
         mov_reformat_node["box_height"].setValue(height)
 
         # setup output quicktime path
-        mov_out = group_node.node("mov_writer")
+        mov_out = self._group_node.node("mov_writer")
         mov_path = mov_path.replace(os.sep, "/")
         mov_out["file"].setValue(mov_path)
 
         # apply the Write node codec settings we'll use for generating the Quicktime
-        self.execute_hook_method("codec_settings_hook",
+        self._bundle.execute_hook_method("codec_settings_hook",
                                  "get_quicktime_settings",
                                  write_node=mov_out)
 
@@ -141,7 +147,6 @@ class Dialog(QtGui.QWidget):
 
         # finally render everything!
         # default to using the first view on stereo
-
         try:
             first_view = nuke.views()[0]
             nuke.executeMultiple(
@@ -153,28 +158,30 @@ class Dialog(QtGui.QWidget):
             # turn off the nodes again
             mov_out.knob('disable').setValue(True)
 
-    def _get_comments(self, sg_version_name):
+    def _submit(self):
         """
-        Get name and comments from user via UI
+        Submits the render for review.
         """
-        # deferred import so that this app runs in batch mode
-        tk_nuke_quickreview = self.import_module("tk_nuke_quickreview")
-        d = tk_nuke_quickreview.CommentsPanel(sg_version_name)
-        result = d.showModalDialog()
-        if result:
-            return d.get_comments()
+        try:
+            self._overlay.start_spin()
+            version_id = self._run_submission()
+        except Exception, e:
+            logger.exception("Something bad happened.")
+            self._overlay.show_error_message("An error was reported: %s" % e)
         else:
-            return None
+            self._overlay.hide()
+            # show success screen
+            self.ui.stack_widget.setCurrentIndex(1)
+            # todo: button
+        finally:
+            # buttons
+            pass
 
-    def submit(self, group_node):
+    def _run_submission(self):
         """
         Called from the gizmo when the review button is pressed.
         Creates
         """
-
-        tk_nuke_quickreview = self.import_module("tk_nuke_quickreview")
-        self.engine.show_dialog("Submit for Review", self, tk_nuke_quickreview.Dialog)
-
         name = "Quickdaily"
 
         # now try to see if we are in a normal work file
@@ -196,30 +203,27 @@ class Dialog(QtGui.QWidget):
         quicktime_filename = "%s_%s" % (name, timestamp_filename)
 
         # get inputs
-        message = self._get_comments(sg_version_name)
-        if message is None:
-            # user pressed cancel!
-            return
+        message = self.ui.comments.toPlainText()
 
         # set metadata
-        self._setup_formatting(group_node, sg_version_name)
+        self._setup_formatting(sg_version_name)
 
         # generate temp file for mov sequence
         mov_folder = tempfile.mkdtemp()
         mov_path = os.path.join(mov_folder, "%s.mov" % quicktime_filename)
 
         # and render!
-        self._render(group_node, mov_path)
+        self._render(mov_path)
 
         # create sg version
         data = {
             "code": sg_version_name,
             "description": message,
-            "project": self.context.project,
-            "entity": self.context.entity,
-            "sg_task": self.context.task,
-            "created_by": sgtk.util.get_current_user(self.sgtk),
-            "user": sgtk.util.get_current_user(self.sgtk),
+            "project": self._bundle.context.project,
+            "entity": self._bundle.context.entity,
+            "sg_task": self._bundle.context.task,
+            "created_by": sgtk.util.get_current_user(self._bundle.sgtk),
+            "user": sgtk.util.get_current_user(self._bundle.sgtk),
             "sg_first_frame": self._get_first_frame(),
             "sg_last_frame": self._get_last_frame(),
             "frame_count": (self._get_last_frame() - self._get_first_frame()) + 1,
@@ -227,25 +231,14 @@ class Dialog(QtGui.QWidget):
             "sg_movie_has_slate": True
         }
 
-        entity = self.shotgun.create("Version", data)
-        self.log_debug("Version created in Shotgun %s" % entity)
+        entity = self._bundle.shotgun.create("Version", data)
+        logger.debug("Version created in Shotgun %s" % entity)
 
         # upload the movie to Shotgun if desired
-        self.log_debug("Uploading movie to Shotgun")
-        self.shotgun.upload("Version", entity["id"], mov_path, "sg_uploaded_movie")
+        logger.debug("Uploading movie to Shotgun")
+        self._bundle.shotgun.upload("Version", entity["id"], mov_path, "sg_uploaded_movie")
 
-        # execute post hook
-        self.log_debug("Running post hooks...")
-        for h in self.get_setting("post_hooks", []):
-            self.execute_hook_by_name(h, shotgun_data=entity)
-
-        # status message!
-        sg_url = "%s/detail/Version/%s" % (self.shotgun.base_url, entity["id"])
-        nuke.message("Your submission was successfully sent to review.")
-
-
-
-
+        return entity["id"]
 
 
 
