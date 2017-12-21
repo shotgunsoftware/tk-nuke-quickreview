@@ -21,6 +21,7 @@ from .ui.dialog import Ui_Dialog
 logger = sgtk.platform.get_logger(__name__)
 overlay = sgtk.platform.import_framework("tk-framework-qtwidgets", "overlay_widget")
 sg_data = sgtk.platform.import_framework("tk-framework-shotgunutils", "shotgun_data")
+task_manager = sgtk.platform.import_framework("tk-framework-shotgunutils", "task_manager")
 
 
 class Dialog(QtGui.QWidget):
@@ -38,6 +39,12 @@ class Dialog(QtGui.QWidget):
         self._bundle = sgtk.platform.current_bundle()
         self._group_node = nuke_review_node
 
+
+        self._task_manager = task_manager.BackgroundTaskManager(parent=self,
+                                                                start_processing=True,
+                                                                max_threads=2)
+
+
         # set up data retriever
         self.__sg_data = sg_data.ShotgunDataRetriever(self)
         self.__sg_data.work_completed.connect(self.__on_worker_signal)
@@ -47,6 +54,10 @@ class Dialog(QtGui.QWidget):
         # set up the UI
         self.ui = Ui_Dialog()
         self.ui.setupUi(self)
+
+        self.ui.context_widget.set_up(self._task_manager)
+        self.ui.context_widget.context_changed.connect(self._on_item_context_change)
+
 
         self._overlay = overlay.ShotgunOverlayWidget(self)
         self.ui.submit.clicked.connect(self._submit)

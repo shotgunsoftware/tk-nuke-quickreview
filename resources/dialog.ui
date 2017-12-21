@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>437</width>
+    <width>391</width>
     <height>352</height>
    </rect>
   </property>
@@ -22,32 +22,72 @@
      <widget class="QWidget" name="page">
       <layout class="QVBoxLayout" name="verticalLayout">
        <item>
-        <layout class="QHBoxLayout" name="horizontalLayout">
-         <item>
+        <layout class="QGridLayout" name="gridLayout_2">
+         <item row="0" column="1">
+          <widget class="QLineEdit" name="title"/>
+         </item>
+         <item row="0" column="0">
           <widget class="QLabel" name="label_3">
            <property name="text">
-            <string>Review Title:</string>
+            <string>Version Name:</string>
            </property>
           </widget>
          </item>
-         <item>
-          <widget class="QLineEdit" name="title"/>
+         <item row="1" column="0">
+          <widget class="QLabel" name="frame_range">
+           <property name="text">
+            <string>Frame Range:</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="1">
+          <layout class="QHBoxLayout" name="horizontalLayout_4">
+           <item>
+            <widget class="QLineEdit" name="lineEdit_2">
+             <property name="maximumSize">
+              <size>
+               <width>30</width>
+               <height>16777215</height>
+              </size>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="frame_range_2">
+             <property name="text">
+              <string>to</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLineEdit" name="lineEdit">
+             <property name="maximumSize">
+              <size>
+               <width>30</width>
+               <height>16777215</height>
+              </size>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <spacer name="horizontalSpacer_4">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>40</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+          </layout>
          </item>
         </layout>
        </item>
        <item>
-        <widget class="QLabel" name="frame_range">
-         <property name="text">
-          <string>Frame Range: 1-200</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QLabel" name="association">
-         <property name="text">
-          <string>Associated with: Task 123, Shot 123</string>
-         </property>
-        </widget>
+        <widget class="ContextWidget" name="context_widget" native="true"/>
        </item>
        <item>
         <widget class="QLabel" name="label_2">
@@ -59,7 +99,7 @@
        <item>
         <widget class="QLabel" name="label">
          <property name="text">
-          <string>Comments:</string>
+          <string>Description</string>
          </property>
         </widget>
        </item>
@@ -67,12 +107,10 @@
         <widget class="QTextEdit" name="comments"/>
        </item>
       </layout>
-      <zorder></zorder>
-      <zorder>association</zorder>
       <zorder>comments</zorder>
-      <zorder>frame_range</zorder>
       <zorder>label</zorder>
       <zorder>label_2</zorder>
+      <zorder>context_widget</zorder>
      </widget>
      <widget class="QWidget" name="page_2">
       <layout class="QGridLayout" name="gridLayout">
@@ -154,7 +192,7 @@
            <item>
             <widget class="QPushButton" name="jump_to_review">
              <property name="text">
-              <string>Jump to Review Version</string>
+              <string>Jump to Shotgun</string>
              </property>
             </widget>
            </item>
@@ -238,6 +276,14 @@
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>ContextWidget</class>
+   <extends>QWidget</extends>
+   <header>..context_widget</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
  <resources>
   <include location="resources.qrc"/>
  </resources>
