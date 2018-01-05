@@ -24,22 +24,22 @@ class Settings(HookBaseClass):
 
     def get_burnins_and_slate(self, sg_version_name):
         """
-        Return the burnins used for the quicktime.
+        Return the burnins that should be used for the quicktime.
 
-        Should return a dictionary with the following items
+        Should return a dictionary with the following keys and format:
 
         {
-            "slate": ["Name: lighting.v003.nk", "..."] # list of lines for slate
+            "slate": ["Name: lighting.v003.nk", "Date: 12 October 2001", "..."] # list of lines for slate
             "top_right": "Top right burnin"
             "top_left": "Top left burnin"
             "bottom_left": "Bottom left burnin"
         }
 
         .. note::
-            The bottom right burnin is used as a frame counter.
+            The bottom right burn-in is used as a frame counter.
 
         :param str sg_version_name: The name of the shotgun review version
-        :returns: Dictionary with burnins and slate strings
+        :returns: Dictionary with burn-ins and slate strings
         """
         context = self.parent.context
 
@@ -93,9 +93,8 @@ class Settings(HookBaseClass):
 
     def get_title(self):
         """
-        Returns the title used for the version
+        Returns the title that should be used for the version
         """
-
         # rather than doing a version numbering scheme, which we
         # reserve for publishing workflows, the default implementation
         # uses a date and time based naming scheme
@@ -120,10 +119,9 @@ class Settings(HookBaseClass):
 
         return sg_version_name
 
-
     def get_resolution(self):
         """
-        Returns the resolution
+        Returns the resolution that should be used when rendering the quicktime.
 
         :returns: tuple with (width, height)
         """
@@ -133,7 +131,7 @@ class Settings(HookBaseClass):
         """
         Allows modifying settings for Quicktime generation.
 
-        :param write_node: Nuke Write node 
+        :param write_node: The nuke write node used to generate the quicktime that is being uploaded.
         """
         if sys.platform == "linux2":
             if nuke.NUKE_VERSION_MAJOR >= 9:
