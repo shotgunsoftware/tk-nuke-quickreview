@@ -299,8 +299,23 @@ class Dialog(QtGui.QWidget):
             "sg_movie_has_slate": True
         }
 
+        # call pre-hook
+        data = self._bundle.execute_hook_method(
+            "events_hook",
+            "before_version_creation",
+            sg_version_data=data
+        )
+
+        # create in shotgun
         entity = self._bundle.shotgun.create("Version", data)
         logger.debug("Version created in Shotgun %s" % entity)
+
+        # call post hook
+        self._bundle.execute_hook_method(
+            "events_hook",
+            "after_version_creation",
+            sg_version_id=entity["id"]
+        )
 
         data = {"version_id": entity["id"], "file_name": mov_path}
         self.__sg_data.execute_method(self._upload_to_shotgun, data)
@@ -319,6 +334,17 @@ class Dialog(QtGui.QWidget):
         """
         Signaled whenever the worker completes something.
         """
+        # call post hook - note that we don't do this in
+        # the thread because calls to the nuke API sometimes
+        # crash when executed from a thread, so for maximum
+        # safety and stability, call post hook from main thread.
+        self._bundle.execute_hook_method(
+            "events_hook",
+            "after_upload",
+            sg_version_id=self._version_id
+        )
+
+        # hide spinner
         self._overlay.hide()
 
         # show success screen
