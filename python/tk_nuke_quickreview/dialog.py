@@ -42,6 +42,7 @@ class Dialog(QtGui.QWidget):
         self._group_node = nuke_review_node
 
         self._context = self._bundle.context
+        self._title = self._generate_title()
 
         self._task_manager = task_manager.BackgroundTaskManager(
             parent=self,
@@ -74,7 +75,7 @@ class Dialog(QtGui.QWidget):
         self.ui.cancel.clicked.connect(self.close)
 
         # set up basic UI
-        self.ui.version_name.setText(self._generate_title())
+        self.ui.version_name.setText(self._title)
         self.ui.start_frame.setText(str(self._get_first_frame()))
         self.ui.end_frame.setText(str(self._get_last_frame()))
 
@@ -108,7 +109,11 @@ class Dialog(QtGui.QWidget):
         """
         Create a title for the version
         """
-        return self._bundle.execute_hook_method("settings_hook", "get_title")
+        return self._bundle.execute_hook_method(
+            "settings_hook",
+            "get_title",
+            context=self._context
+        )
 
     def _setup_formatting(self, sg_version_name):
         """
@@ -222,6 +227,8 @@ class Dialog(QtGui.QWidget):
         """
         logger.debug("Setting version context to %s" % context)
         self._context = context
+        self._title = self._generate_title()
+        self.ui.version_name.setText(self._title)
 
     def _submit(self):
         """

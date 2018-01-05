@@ -91,20 +91,36 @@ class Settings(HookBaseClass):
 
         return return_data
 
-    def get_title(self):
+    def get_title(self, context):
         """
         Returns the title that should be used for the version
+
+        :param context: The context associated with the version.
+        :returns: Version title string.
         """
         # rather than doing a version numbering scheme, which we
         # reserve for publishing workflows, the default implementation
         # uses a date and time based naming scheme
 
+        sg_version_name = ""
+
+        # include the shot/link as part of the name
+        # if context.entity and context.entity["name"]:
+        #     # start with the link
+        #     sg_version_name += "[%s %s] " % (
+        #         context.entity["type"],
+        #         context.entity["name"]
+        #     )
+
         # default name in case no nuke file name is set
-        name = "Nuke Quickreview"
+        name = "Quickreview"
 
         # now try to see if we are in a normal work file
         # in that case deduce the name from it
         current_scene_path = nuke.root().name()
+        if isinstance(current_scene_path, unicode):
+            current_scene_path = current_scene_path.encode("utf-8")
+
         if current_scene_path and current_scene_path != "Root":
             current_scene_path = current_scene_path.replace("/", os.path.sep)
             # get just filename
@@ -113,9 +129,11 @@ class Settings(HookBaseClass):
             current_scene_name = os.path.splitext(current_scene_name)[0]
             name = current_scene_name.replace("_", " ").capitalize()
 
+        sg_version_name += name
+
         # append date and time
-        timestamp = datetime.datetime.now().strftime("%d %b %Y %H:%M")
-        sg_version_name = "%s %s" % (name, timestamp)
+        timestamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M")
+        sg_version_name += ", %s" % timestamp
 
         return sg_version_name
 
