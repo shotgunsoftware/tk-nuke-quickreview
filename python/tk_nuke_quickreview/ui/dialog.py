@@ -33,6 +33,7 @@ class Ui_Dialog(object):
         self.context_widget.setObjectName("context_widget")
         self.verticalLayout.addWidget(self.context_widget)
         self.spacer_label = QtGui.QLabel(self.page)
+        self.spacer_label.setText("")
         self.spacer_label.setObjectName("spacer_label")
         self.verticalLayout.addWidget(self.spacer_label)
         self.description_label = QtGui.QLabel(self.page)
@@ -127,8 +128,7 @@ class Ui_Dialog(object):
 
     def retranslateUi(self, Dialog):
         Dialog.setWindowTitle(QtGui.QApplication.translate("Dialog", "Shotgun Publish", None, QtGui.QApplication.UnicodeUTF8))
-        self.version_name_label.setText(QtGui.QApplication.translate("Dialog", "Version Name:", None, QtGui.QApplication.UnicodeUTF8))
-        self.spacer_label.setText(QtGui.QApplication.translate("Dialog", " ", None, QtGui.QApplication.UnicodeUTF8))
+        self.version_name_label.setText(QtGui.QApplication.translate("Dialog", "Name:", None, QtGui.QApplication.UnicodeUTF8))
         self.description_label.setText(QtGui.QApplication.translate("Dialog", "Description:", None, QtGui.QApplication.UnicodeUTF8))
         self.frame_range.setText(QtGui.QApplication.translate("Dialog", "Frame Range:", None, QtGui.QApplication.UnicodeUTF8))
         self.frame_range_to.setText(QtGui.QApplication.translate("Dialog", "to", None, QtGui.QApplication.UnicodeUTF8))

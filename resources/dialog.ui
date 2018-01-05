@@ -26,7 +26,7 @@
          <item>
           <widget class="QLabel" name="version_name_label">
            <property name="text">
-            <string>Version Name:</string>
+            <string>Name:</string>
            </property>
           </widget>
          </item>
@@ -41,7 +41,7 @@
        <item>
         <widget class="QLabel" name="spacer_label">
          <property name="text">
-          <string> </string>
+          <string/>
          </property>
         </widget>
        </item>
@@ -111,11 +111,6 @@
       <zorder>description_label</zorder>
       <zorder>context_widget</zorder>
       <zorder></zorder>
-      <zorder>frame_range</zorder>
-      <zorder>end_frame</zorder>
-      <zorder>frame_range_to</zorder>
-      <zorder>start_frame</zorder>
-      <zorder>horizontalSpacer_4</zorder>
       <zorder>spacer_label</zorder>
      </widget>
      <widget class="QWidget" name="page_2">
