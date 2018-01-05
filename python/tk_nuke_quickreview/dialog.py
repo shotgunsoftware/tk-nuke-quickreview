@@ -64,9 +64,9 @@ class Dialog(QtGui.QWidget):
         self.ui.setupUi(self)
 
         self.ui.context_widget.set_up(self._task_manager)
-
         self.ui.context_widget.set_context(self._context)
         self.ui.context_widget.context_label.hide()
+        self.ui.context_widget.restrict_entity_types_by_link("Version", "entity")
 
         self.ui.context_widget.context_changed.connect(self._on_context_change)
 
