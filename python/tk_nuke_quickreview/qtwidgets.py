@@ -15,7 +15,7 @@ easily from with Qt Designer
 
 import sgtk
 
-global_search_widget = sgtk.platform.import_framework("tk-framework-qtwidgets", "global_search_widget")
-GlobalSearchWidget = global_search_widget.GlobalSearchWidget
+context_selector = sgtk.platform.import_framework("tk-framework-qtwidgets", "context_selector")
+ContextWidget = context_selector.ContextWidget
 
 

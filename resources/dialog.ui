@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>391</width>
-    <height>352</height>
+    <width>392</width>
+    <height>430</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -22,67 +22,16 @@
      <widget class="QWidget" name="page">
       <layout class="QVBoxLayout" name="verticalLayout">
        <item>
-        <layout class="QGridLayout" name="gridLayout_2">
-         <item row="0" column="1">
-          <widget class="QLineEdit" name="title"/>
-         </item>
-         <item row="0" column="0">
-          <widget class="QLabel" name="label_3">
+        <layout class="QHBoxLayout" name="horizontalLayout">
+         <item>
+          <widget class="QLabel" name="version_name_label">
            <property name="text">
             <string>Version Name:</string>
            </property>
           </widget>
          </item>
-         <item row="1" column="0">
-          <widget class="QLabel" name="frame_range">
-           <property name="text">
-            <string>Frame Range:</string>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="1">
-          <layout class="QHBoxLayout" name="horizontalLayout_4">
-           <item>
-            <widget class="QLineEdit" name="lineEdit_2">
-             <property name="maximumSize">
-              <size>
-               <width>30</width>
-               <height>16777215</height>
-              </size>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLabel" name="frame_range_2">
-             <property name="text">
-              <string>to</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLineEdit" name="lineEdit">
-             <property name="maximumSize">
-              <size>
-               <width>30</width>
-               <height>16777215</height>
-              </size>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <spacer name="horizontalSpacer_4">
-             <property name="orientation">
-              <enum>Qt::Horizontal</enum>
-             </property>
-             <property name="sizeHint" stdset="0">
-              <size>
-               <width>40</width>
-               <height>20</height>
-              </size>
-             </property>
-            </spacer>
-           </item>
-          </layout>
+         <item>
+          <widget class="QLineEdit" name="version_name"/>
          </item>
         </layout>
        </item>
@@ -90,27 +39,84 @@
         <widget class="ContextWidget" name="context_widget" native="true"/>
        </item>
        <item>
-        <widget class="QLabel" name="label_2">
+        <widget class="QLabel" name="spacer_label">
          <property name="text">
-          <string/>
+          <string> </string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QLabel" name="label">
+        <widget class="QLabel" name="description_label">
          <property name="text">
-          <string>Description</string>
+          <string>Description:</string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QTextEdit" name="comments"/>
+        <widget class="QTextEdit" name="description"/>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_5">
+         <item>
+          <widget class="QLabel" name="frame_range">
+           <property name="text">
+            <string>Frame Range:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="start_frame">
+           <property name="maximumSize">
+            <size>
+             <width>40</width>
+             <height>16777215</height>
+            </size>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="frame_range_to">
+           <property name="text">
+            <string>to</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="end_frame">
+           <property name="maximumSize">
+            <size>
+             <width>40</width>
+             <height>16777215</height>
+            </size>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer_4">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
        </item>
       </layout>
-      <zorder>comments</zorder>
-      <zorder>label</zorder>
-      <zorder>label_2</zorder>
+      <zorder>description</zorder>
+      <zorder>description_label</zorder>
       <zorder>context_widget</zorder>
+      <zorder></zorder>
+      <zorder>frame_range</zorder>
+      <zorder>end_frame</zorder>
+      <zorder>frame_range_to</zorder>
+      <zorder>start_frame</zorder>
+      <zorder>horizontalSpacer_4</zorder>
+      <zorder>spacer_label</zorder>
      </widget>
      <widget class="QWidget" name="page_2">
       <layout class="QGridLayout" name="gridLayout">
@@ -185,14 +191,24 @@
            <item>
             <widget class="QLabel" name="label_8">
              <property name="text">
-              <string>Upload Complete!</string>
+              <string>Version Creation Complete!</string>
+             </property>
+             <property name="textInteractionFlags">
+              <set>Qt::LinksAccessibleByKeyboard|Qt::LinksAccessibleByMouse</set>
              </property>
             </widget>
            </item>
            <item>
-            <widget class="QPushButton" name="jump_to_review">
+            <widget class="QPushButton" name="jump_to_shotgun">
              <property name="text">
-              <string>Jump to Shotgun</string>
+              <string>Show in Shotgun</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="jump_to_panel">
+             <property name="text">
+              <string>Show in Panel</string>
              </property>
             </widget>
            </item>
@@ -280,10 +296,19 @@
   <customwidget>
    <class>ContextWidget</class>
    <extends>QWidget</extends>
-   <header>..context_widget</header>
+   <header>..qtwidgets</header>
    <container>1</container>
   </customwidget>
  </customwidgets>
+ <tabstops>
+  <tabstop>description</tabstop>
+  <tabstop>version_name</tabstop>
+  <tabstop>start_frame</tabstop>
+  <tabstop>end_frame</tabstop>
+  <tabstop>submit</tabstop>
+  <tabstop>cancel</tabstop>
+  <tabstop>jump_to_panel</tabstop>
+ </tabstops>
  <resources>
   <include location="resources.qrc"/>
  </resources>
