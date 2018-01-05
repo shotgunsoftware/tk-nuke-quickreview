@@ -18,6 +18,12 @@ configuration:
         description: Hook for customizing settings and behavior.
         default_value: '{self}/settings.py'
 
+    events_hook:
+        type: hook
+        description: Hook for adding extra logic and
+                     customization during the different submission stages.
+        default_value: '{self}/events.py'
+
 # the Shotgun fields that this app needs in order to operate correctly
 requires_shotgun_fields:
 
