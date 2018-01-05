@@ -10,7 +10,7 @@ Group {
  mapsize {0.15 0.15}
  addUserKnob {20 tanktab l "Shotgun Review"}
  addUserKnob {26 ""}
- addUserKnob {26 "" l "" +STARTLINE T "\nClick to create a version and upload it to Shotgun."}
+ addUserKnob {26 "" l "" +STARTLINE T "\nClick to create a Version and upload it to Shotgun."}
  addUserKnob {26 ""}
  addUserKnob {22 "" l "Upload to Shotgun" T "# have to gracefully support the case when \n# Sgtk is not in the system at all or when \n# running an incompatible version of Sgtk.\nimport nuke\ntry:\n  app = nuke.tk_nuke_quickreview\n  fn = app.create_review\nexcept Exception, e:\n  nuke.warning(\"Could not render Shotgun Quickreview! Most likely Toolkit is not currently active. Message: %s\" % e)\nelse:\n  fn(nuke.thisNode())\n\n" +STARTLINE}
  addUserKnob {26 ""}
