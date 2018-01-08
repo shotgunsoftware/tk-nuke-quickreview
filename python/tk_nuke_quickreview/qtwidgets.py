@@ -1,4 +1,4 @@
-# Copyright (c) 2013 Shotgun Software Inc.
+# Copyright (c) 2017 Shotgun Software Inc.
 # 
 # CONFIDENTIAL AND PROPRIETARY
 # 
@@ -8,4 +8,14 @@
 # agreement to the Shotgun Pipeline Toolkit Source Code License. All rights 
 # not expressly granted therein are reserved by Shotgun Software Inc.
 
-from .comments_ui import CommentsPanel
+"""
+Wrapper for the various widgets used from frameworks so that they can be used
+easily from with Qt Designer
+"""
+
+import sgtk
+
+context_selector = sgtk.platform.import_framework("tk-framework-qtwidgets", "context_selector")
+ContextWidget = context_selector.ContextWidget
+
+
