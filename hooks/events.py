@@ -9,17 +9,14 @@
 # not expressly granted therein are reserved by Shotgun Software Inc.
 
 import sgtk
-import sys
-import os
-import nuke
-import datetime
 
 HookBaseClass = sgtk.get_hook_baseclass()
 
 
 class ReviewEvents(HookBaseClass):
     """
-    Hook which
+    Hook which exposes main events in the review workflow, allowing
+    for data injections.
     """
 
     def before_version_creation(self, sg_version_data):
