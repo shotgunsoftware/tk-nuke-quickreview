@@ -12,6 +12,7 @@ import os
 import nuke
 import sgtk
 import tempfile
+import datetime
 from sgtk import TankError
 from sgtk.platform.qt import QtCore, QtGui
 
@@ -78,6 +79,73 @@ class Dialog(QtGui.QWidget):
         self.ui.version_name.setText(self._title)
         self.ui.start_frame.setText(str(self._get_first_frame()))
         self.ui.end_frame.setText(str(self._get_last_frame()))
+
+        self._setup_playlist_dropdown()
+
+
+    def _setup_playlist_dropdown(self):
+        """
+        Sets up the playlist dropdown widget
+        """
+        self.ui.playlists.setToolTip(
+            "<p>Shows the 10 most recently updated playlists for "
+            "the project that aren't closed and have a viewing date "
+            "set to the future.</p>"
+        )
+
+        self.ui.playlists.addItem("Add to Playlist", 0)
+
+        from tank_vendor.shotgun_api3.lib.sgtimezone import LocalTimezone
+        datetime_now = datetime.datetime.now(LocalTimezone())
+
+        playlists = self._bundle.shotgun.find(
+            "Playlist",
+            [
+                ["project", "is", self._bundle.context.project],
+                ["sg_status", "is_not", "clsd"],
+                ["sg_date_and_time", "greater_than", datetime_now]
+            ],
+            ["code", "id", "sg_date_and_time"],
+            order=[{"field_name": "updated_at", "direction": "desc"}],
+            limit=10,
+        )
+
+        for playlist in playlists:
+
+            if playlist.get("sg_date_and_time"):
+                # 'Add to playlist dailies (Today 12:00)'
+                caption = "%s (%s)" % (
+                    playlist["code"],
+                    self._format_timestamp(playlist["sg_date_and_time"])
+                )
+            else:
+                caption = playlist["code"]
+
+            self.ui.playlists.addItem(caption, playlist["id"])
+
+    def _format_timestamp(self, datetime_obj):
+        """
+        Formats the given datetime object in a short human readable form.
+
+        :param datetime_obj: Datetime obj to format
+        :returns: date str
+        """
+        from tank_vendor.shotgun_api3.lib.sgtimezone import LocalTimezone
+        datetime_now = datetime.datetime.now(LocalTimezone())
+
+        datetime_tomorrow = datetime_now + datetime.timedelta(hours=24)
+
+        if datetime_obj.date() == datetime_now.date():
+            # today - display timestamp - Today 01:37AM
+            return datetime_obj.strftime("Today %I:%M%p")
+
+        elif datetime_obj.date() == datetime_tomorrow.date():
+            # tomorrow - display timestamp - Tomorrow 01:37AM
+            return datetime_obj.strftime("Tomorrow %I:%M%p")
+
+        else:
+            # 24 June 01:37AM
+            return datetime_obj.strftime("%d %b %I:%M%p")
 
     def closeEvent(self, event):
         """
@@ -305,6 +373,12 @@ class Dialog(QtGui.QWidget):
             "frame_range": "%d-%d" % (start_frame, end_frame),
             "sg_movie_has_slate": True
         }
+
+        if self.ui.playlists.itemData(self.ui.playlists.currentIndex()) != 0:
+            data["playlists"] = [{
+                "type": "Playlist",
+                "id": self.ui.playlists.itemData(self.ui.playlists.currentIndex())
+            }]
 
         # call pre-hook
         data = self._bundle.execute_hook_method(
