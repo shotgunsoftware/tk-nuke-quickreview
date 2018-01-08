@@ -102,7 +102,13 @@ class Dialog(QtGui.QWidget):
             [
                 ["project", "is", self._bundle.context.project],
                 ["sg_status", "is_not", "clsd"],
-                ["sg_date_and_time", "greater_than", datetime_now]
+                {
+                    "filter_operator": "any",
+                    "filters": [
+                        ["sg_date_and_time", "greater_than", datetime_now],
+                        ["sg_date_and_time", "is", None]
+                    ]
+                }
             ],
             ["code", "id", "sg_date_and_time"],
             order=[{"field_name": "updated_at", "direction": "desc"}],
@@ -201,7 +207,8 @@ class Dialog(QtGui.QWidget):
         fields_dict = self._bundle.execute_hook_method(
             "settings_hook",
             "get_burnins_and_slate",
-            sg_version_name=sg_version_name
+            sg_version_name=sg_version_name,
+            context=self._context,
         )
 
         # set up burnins

@@ -22,7 +22,7 @@ class Settings(HookBaseClass):
     Controls various review settings and formatting.
     """
 
-    def get_burnins_and_slate(self, sg_version_name):
+    def get_burnins_and_slate(self, sg_version_name, context):
         """
         Return the burnins that should be used for the quicktime.
 
@@ -39,10 +39,9 @@ class Settings(HookBaseClass):
             The bottom right burn-in is used as a frame counter.
 
         :param str sg_version_name: The name of the shotgun review version
+        :param context: The context associated with the version.
         :returns: Dictionary with burn-ins and slate strings
         """
-        context = self.parent.context
-
         return_data = {}
 
         # current user
