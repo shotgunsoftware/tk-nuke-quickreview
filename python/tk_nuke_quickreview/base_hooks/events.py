@@ -15,18 +15,20 @@ HookBaseClass = sgtk.get_hook_baseclass()
 
 class ReviewEvents(HookBaseClass):
     """
-    Hook which exposes main events in the review workflow, allowing
-    for data injections.
+    This hook exposes main events in the review workflow, allowing
+    for various data injections and post processing.
     """
 
     def before_version_creation(self, sg_version_data):
         """
-        Called before the version entity is created.
+        Called before the version entity is created, allowing
+        for injections of additional metadata or fields before
+        anything has been added to shotgun.
 
         :param dict sg_version_data: Shotgun version dictionary
         :returns: Modified Shotgun version dictionary
         """
-        return sg_version_data
+        raise NotImplementedError
 
     def after_version_creation(self, sg_version_id):
         """
@@ -35,7 +37,7 @@ class ReviewEvents(HookBaseClass):
 
         :param int sg_version_id: The associated version id
         """
-        pass
+        raise NotImplementedError
 
     def after_upload(self, sg_version_id):
         """
@@ -43,4 +45,4 @@ class ReviewEvents(HookBaseClass):
 
         :param int sg_version_id: The associated version id
         """
-        pass
+        raise NotImplementedError

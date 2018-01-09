@@ -9,7 +9,6 @@
 # not expressly granted therein are reserved by Shotgun Software Inc.
 
 import os
-import nuke
 import sgtk
 import tempfile
 import datetime
@@ -170,12 +169,14 @@ class Dialog(QtGui.QWidget):
         """
         Returns the first frame for this session
         """
+        import nuke
         return int(nuke.root()["first_frame"].value())
 
     def _get_last_frame(self):
         """
         Returns the last frame for this session
         """
+        import nuke
         return int(nuke.root()["last_frame"].value())
 
     def _generate_title(self):
@@ -185,7 +186,8 @@ class Dialog(QtGui.QWidget):
         return self._bundle.execute_hook_method(
             "settings_hook",
             "get_title",
-            context=self._context
+            context=self._context,
+            base_class=self._bundle.base_hooks.ReviewSettings
         )
 
     def _setup_formatting(self, sg_version_name):
@@ -209,6 +211,7 @@ class Dialog(QtGui.QWidget):
             "get_burnins_and_slate",
             sg_version_name=sg_version_name,
             context=self._context,
+            base_class=self._bundle.base_hooks.ReviewSettings
         )
 
         # set up burnins
@@ -229,10 +232,13 @@ class Dialog(QtGui.QWidget):
         :param int start_frame: First frame to render
         :param int end_frame: Last frame to render
         """
+        import nuke
+
         # setup quicktime output resolution
         (width, height) = self._bundle.execute_hook_method(
             "settings_hook",
-            "get_resolution"
+            "get_resolution",
+            base_class=self._bundle.base_hooks.ReviewSettings
         )
 
         mov_reformat_node = self._group_node.node("mov_reformat")
@@ -248,7 +254,8 @@ class Dialog(QtGui.QWidget):
         self._bundle.execute_hook_method(
             "settings_hook",
             "setup_quicktime_node",
-            write_node=mov_out
+            write_node=mov_out,
+            base_class=self._bundle.base_hooks.ReviewSettings
         )
 
         # turn on the node
@@ -390,7 +397,8 @@ class Dialog(QtGui.QWidget):
         data = self._bundle.execute_hook_method(
             "events_hook",
             "before_version_creation",
-            sg_version_data=data
+            sg_version_data=data,
+            base_class=self._bundle.base_hooks.ReviewEvents
         )
 
         # create in shotgun
@@ -401,7 +409,8 @@ class Dialog(QtGui.QWidget):
         self._bundle.execute_hook_method(
             "events_hook",
             "after_version_creation",
-            sg_version_id=entity["id"]
+            sg_version_id=entity["id"],
+            base_class=self._bundle.base_hooks.ReviewEvents
         )
 
         data = {"version_id": entity["id"], "file_name": mov_path}
@@ -428,7 +437,8 @@ class Dialog(QtGui.QWidget):
         self._bundle.execute_hook_method(
             "events_hook",
             "after_upload",
-            sg_version_id=self._version_id
+            sg_version_id=self._version_id,
+            base_class=self._bundle.base_hooks.ReviewEvents
         )
 
         # hide spinner
