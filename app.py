@@ -26,6 +26,10 @@ class NukeQuickReview(sgtk.platform.Application):
         # assign this app to nuke handle so that the gizmo finds it
         nuke.tk_nuke_quickreview = self
 
+        # make the base plugins available via the app
+        tk_nuke_quickreview = self.import_module("tk_nuke_quickreview")
+        self._base_hooks = tk_nuke_quickreview.base_hooks
+
         # add to nuke node menu
         icon = os.path.join(self.disk_location, "resources", "node_icon.png")
 
@@ -34,6 +38,21 @@ class NukeQuickReview(sgtk.platform.Application):
             self.create_node,
             {"type": "node", "icon": icon}
         )
+
+    @property
+    def base_hooks(self):
+        """
+        Exposes the ``base_hooks`` module.
+
+        This module provides base class implementations hooks.
+
+        Access to these classes won't typically be needed when writing hooks as
+        they are are injected into the class hierarchy automatically for any
+        collector or publish plugins configured.
+
+        :return: A handle on the app's ``base_hooks`` module.
+        """
+        return self._base_hooks
 
     @property
     def context_change_allowed(self):
