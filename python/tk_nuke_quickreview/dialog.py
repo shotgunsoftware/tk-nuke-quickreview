@@ -87,7 +87,7 @@ class Dialog(QtGui.QWidget):
         """
         self.ui.playlists.setToolTip(
             "<p>Shows the 10 most recently updated playlists for "
-            "the project that aren't closed and have a viewing date "
+            "the project that have a viewing date "
             "set to the future.</p>"
         )
 
@@ -100,7 +100,6 @@ class Dialog(QtGui.QWidget):
             "Playlist",
             [
                 ["project", "is", self._bundle.context.project],
-                ["sg_status", "is_not", "clsd"],
                 {
                     "filter_operator": "any",
                     "filters": [
