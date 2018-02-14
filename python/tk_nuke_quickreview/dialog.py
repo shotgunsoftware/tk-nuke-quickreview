@@ -91,7 +91,7 @@ class Dialog(QtGui.QWidget):
             "set to the future.</p>"
         )
 
-        self.ui.playlists.addItem("Add to open Playlist", 0)
+        self.ui.playlists.addItem("Add to playlist", 0)
 
         from tank_vendor.shotgun_api3.lib.sgtimezone import LocalTimezone
         datetime_now = datetime.datetime.now(LocalTimezone())
