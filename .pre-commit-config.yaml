@@ -1,4 +1,4 @@
-# Copyright (c) 2019 Shotgun Software Inc.
+# Copyright (c) 2020 Shotgun Software Inc.
 #
 # CONFIDENTIAL AND PROPRIETARY
 #
@@ -8,26 +8,24 @@
 # agreement to the Shotgun Pipeline Toolkit Source Code License. All rights
 # not expressly granted therein are reserved by Shotgun Software Inc.
 
-# Styles the code properly.
-# Exclude the UI files, as they are auto-generated.
-exclude: "ui\/.*py$|httplib.py|urllib2.py"
 # List of super useful formatters.
+exclude: "ui\/.*py$"
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v2.4.0
+    rev: v3.2.0
     hooks:
-    # Ensures the code is has the correct syntax.
+    # Ensures the code is syntaxically correct
     - id: check-ast
       language_version: python3
-    # Ensures a file name will resolve on all platform.
+    # Ensures a file name will resolve on all platform
     - id: check-case-conflict
-    # Checks files with the execute bit set have shebangs.
-    # - id: check-executables-have-shebangs
+    # Checks files with the execute bit set have shebangs
+    - id: check-executables-have-shebangs
     # Ensure there's no incomplete merges
     - id: check-merge-conflict
     # Adds an empty line if missing at the end of a file.
     - id: end-of-file-fixer
-    # Makes sure requirements.txt is properly formatted.
+    # Makes sure requirements.txt is properly formatted
     - id: requirements-txt-fixer
     # Removes trailing whitespaces.
     - id: trailing-whitespace
