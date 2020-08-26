@@ -36,5 +36,3 @@ Adding events and automation
 
 .. autoclass:: ReviewEvents
     :members:
-
-

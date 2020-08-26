@@ -1,11 +1,11 @@
 # Copyright (c) 2017 Shotgun Software Inc.
-# 
+#
 # CONFIDENTIAL AND PROPRIETARY
-# 
-# This work is provided "AS IS" and subject to the Shotgun Pipeline Toolkit 
+#
+# This work is provided "AS IS" and subject to the Shotgun Pipeline Toolkit
 # Source Code License included in this distribution package. See LICENSE.
-# By accessing, using, copying or modifying this work you indicate your 
-# agreement to the Shotgun Pipeline Toolkit Source Code License. All rights 
+# By accessing, using, copying or modifying this work you indicate your
+# agreement to the Shotgun Pipeline Toolkit Source Code License. All rights
 # not expressly granted therein are reserved by Shotgun Software Inc.
 
 
@@ -34,9 +34,7 @@ class NukeQuickReview(sgtk.platform.Application):
         icon = os.path.join(self.disk_location, "resources", "node_icon.png")
 
         self.engine.register_command(
-            "Shotgun Quick Review",
-            self.create_node,
-            {"type": "node", "icon": icon}
+            "Shotgun Quick Review", self.create_node, {"type": "node", "icon": icon}
         )
 
     @property
@@ -60,12 +58,14 @@ class NukeQuickReview(sgtk.platform.Application):
         Specifies that context changes are allowed.
         """
         return True
-                      
+
     def create_node(self):
         """
         Creates a quick review node
         """
-        nk_file = os.path.join(self.disk_location, "resources", "tk_nuke_quickreview.nk")
+        nk_file = os.path.join(
+            self.disk_location, "resources", "tk_nuke_quickreview.nk"
+        )
         nk_file = nk_file.replace(os.sep, "/")
         nuke.nodePaste(nk_file)
 
@@ -80,6 +80,5 @@ class NukeQuickReview(sgtk.platform.Application):
             "Submit for Review",
             self,
             tk_nuke_quickreview.Dialog,
-            nuke_review_node=group_node
+            nuke_review_node=group_node,
         )
-
