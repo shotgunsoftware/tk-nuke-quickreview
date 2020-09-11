@@ -32,7 +32,7 @@ class Dialog(QtGui.QWidget):
     Main dialog window for the App
     """
 
-    (DATA_ENTRY_UI, UPLOAD_COMPLETE_UI) = list(range(2))
+    (DATA_ENTRY_UI, UPLOAD_COMPLETE_UI) = range(2)
 
     def __init__(self, nuke_review_node, parent=None):
         """
