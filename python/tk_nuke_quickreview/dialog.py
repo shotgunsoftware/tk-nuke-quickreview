@@ -460,8 +460,8 @@ class Dialog(QtGui.QWidget):
         for app in self._bundle.engine.apps.values():
             if app.name == "tk-multi-shotgunpanel":
                 # panel is loaded
-                launch_panel_fn = lambda panel_app=app: self._navigate_panel_and_close(
-                    panel_app, self._version_id
+                launch_panel_fn = lambda: self._navigate_panel_and_close(
+                    app, self._version_id
                 )
                 self.ui.jump_to_panel.clicked.connect(launch_panel_fn)
                 found_panel = True
