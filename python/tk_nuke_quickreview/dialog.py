@@ -465,6 +465,7 @@ class Dialog(QtGui.QWidget):
                 )
                 self.ui.jump_to_panel.clicked.connect(launch_panel_fn)
                 found_panel = True
+                break
 
         if not found_panel:
             # no panel, so hide button
