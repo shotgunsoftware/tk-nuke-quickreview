@@ -151,8 +151,9 @@ class Settings(HookBaseClass):
                 # the 'codec' knob name was changed to 'format' in Nuke 7
                 write_node["file_type"].setValue("ffmpeg")
                 write_node["format"].setValue("MOV format (mov)")
-        elif nuke.NUKE_VERSION_MAJOR >= 10 and (
-            nuke.NUKE_VERSION_MINOR > 1 or nuke.NUKE_VERSION_RELEASE > 1
+        elif nuke.NUKE_VERSION_MAJOR > 10 or (
+            nuke.NUKE_VERSION_MAJOR == 10
+            and (nuke.NUKE_VERSION_MINOR > 1 or nuke.NUKE_VERSION_RELEASE > 1)
         ):
             # In Nuke 10.0v2, the dependency on the Quicktime desktop application was removed. Because of
             # that, we have to account for changes in the .mov encoding settings in the Write node.
@@ -169,7 +170,6 @@ class Settings(HookBaseClass):
             else:
                 write_node["codec"].setValue("jpeg")
             write_node["fps"].setValue(23.97599983)
-
             # note: in older versions of nuke, this settings string represents all the quicktime
             # code settings used on windows and mac.
             write_node["settings"].setValue(
