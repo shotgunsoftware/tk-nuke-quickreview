@@ -355,12 +355,10 @@ class Dialog(QtGui.QWidget):
         """
         # get inputs - these come back as unicode so make sure convert to utf-8
         version_name = self.ui.version_name.text()
-        if isinstance(version_name, six.text_type):
-            version_name = six.ensure_str(version_name)
+        version_name = six.ensure_str(version_name)
 
         description = self.ui.description.toPlainText()
-        if isinstance(description, six.text_type):
-            description = six.ensure_str(description)
+        description = six.ensure_str(description)
 
         # set metadata
         self._setup_formatting(version_name)
