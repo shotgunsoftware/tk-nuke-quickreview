@@ -33,7 +33,7 @@ description: "A custom Nuke node that creates a quicktime and uploads it to Shot
 
 # Required minimum versions for this item to run
 requires_shotgun_version:
-requires_core_version: "v0.19.0"
+requires_core_version: "v0.19.8"
 requires_engine_version: "v0.2.3"
 
 # the engines that this app can operate in:
