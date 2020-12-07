@@ -16,7 +16,6 @@ from sgtk.platform.qt import QtCore, QtGui
 from tank_vendor import six
 
 from .ui.dialog import Ui_Dialog
-from six.moves import range
 
 logger = sgtk.platform.get_logger(__name__)
 
