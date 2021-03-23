@@ -14,6 +14,8 @@ import os
 import nuke
 import datetime
 
+from tank_vendor import six
+
 HookBaseClass = sgtk.get_hook_baseclass()
 
 
@@ -107,8 +109,7 @@ class Settings(HookBaseClass):
         # now try to see if we are in a normal work file
         # in that case deduce the name from it
         current_scene_path = nuke.root().name()
-        if isinstance(current_scene_path, unicode):
-            current_scene_path = current_scene_path.encode("utf-8")
+        current_scene_path = six.ensure_str(current_scene_path)
 
         if current_scene_path and current_scene_path != "Root":
             current_scene_path = current_scene_path.replace("/", os.path.sep)
@@ -140,7 +141,7 @@ class Settings(HookBaseClass):
 
         :param write_node: The nuke write node used to generate the quicktime that is being uploaded.
         """
-        if sys.platform == "linux2":
+        if sgtk.util.is_linux():
             if nuke.NUKE_VERSION_MAJOR >= 9:
                 # Nuke 9.0v1 removed ffmpeg and replaced it with the mov64 writer
                 # http://help.thefoundry.co.uk/nuke/9.0/#appendices/appendixc/supported_file_formats.html

@@ -13,6 +13,7 @@ import sgtk
 import tempfile
 import datetime
 from sgtk.platform.qt import QtCore, QtGui
+from tank_vendor import six
 
 from .ui.dialog import Ui_Dialog
 
@@ -353,12 +354,10 @@ class Dialog(QtGui.QWidget):
         """
         # get inputs - these come back as unicode so make sure convert to utf-8
         version_name = self.ui.version_name.text()
-        if isinstance(version_name, unicode):
-            version_name = version_name.encode("utf-8")
+        version_name = six.ensure_str(version_name)
 
         description = self.ui.description.toPlainText()
-        if isinstance(description, unicode):
-            description = description.encode("utf-8")
+        description = six.ensure_str(description)
 
         # set metadata
         self._setup_formatting(version_name)
