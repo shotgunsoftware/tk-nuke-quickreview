@@ -10,51 +10,52 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Shotgun Nuke Quickreview API reference, v1.0.3 &mdash; tk-nuke-quickreview v1.0.3 documentation</title>
+  <title>Shotgun Nuke Quickreview API reference, v1.1.0 &mdash; tk-nuke-quickreview v1.1.0 documentation</title>
   
 
   
   
+  
+  
 
   
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
 
-  
-  
     
 
   
-
-  
-  
-    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  
-
-  
-
-  
-    <link rel="top" title="tk-nuke-quickreview v1.0.3 documentation" href="#"/> 
-
-  
-  <script src="_static/js/modernizr.min.js"></script>
-
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/graphviz.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
 </head>
 
-<body class="wy-body-for-nav" role="document">
+<body class="wy-body-for-nav">
 
+   
   <div class="wy-grid-for-nav">
-
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search">
+        <div class="wy-side-nav-search" >
           
     <a href='http://developer.shotgunsoftware.com'>
     
         <img style='width: 191px;
-                height: 60px; 
+                height: 60px;
                 margin: 2px;
-                border-radius: 0px; 
-                padding: 0px;' 
+                border-radius: 0px;
+                padding: 0px;'
             src='_static/logo@2x.png'/>
     
     </a>
@@ -87,9 +88,12 @@
     
             
             
-                <!-- Local TOC -->
-                <div class="local-toc"><ul>
-<li><a class="reference internal" href="#">Shotgun Nuke Quickreview API reference, v1.0.3</a><ul>
+              
+            
+            
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">Shotgun Nuke Quickreview API reference, v1.1.0</a><ul>
 <li><a class="reference internal" href="#controlling-naming-and-formatting">Controlling naming and formatting</a></li>
 <li><a class="reference internal" href="#adding-events-and-automation">Adding events and automation</a></li>
 </ul>
@@ -104,26 +108,26 @@
     <div style='margin-top: 50px;
                 margin-left: 10px;
                 margin-right: 10px;
-                padding: 10px; 
-                color: #b3b3b3; 
+                padding: 10px;
+                color: #b3b3b3;
                 font-size: 70%;
                 border-radius: 3px;
                 background-color: #444;
                 line-height: 18px;
-                '>    
+                '>
     <style>
-        a.custom_post_menu { display: inline; 
-                             padding: 0px; 
+        a.custom_post_menu { display: inline;
+                             padding: 0px;
                              text-decoration: underline; }
     </style>
 
-    <b>tk-nuke-quickreview</b> v1.0.3.<br>
+    <b>tk-nuke-quickreview</b> v1.1.0.<br>
     
         This documentation is part of the Shotgun Pipeline Toolkit.
     
     For more information, please visit
     <a class=custom_post_menu href='https://support.shotgunsoftware.com/home'>Shotgun Support</a>.
-    The code associated with this documentation can be found 
+    The code associated with this documentation can be found
     <a class=custom_post_menu href='https://github.com/shotgunsoftware/tk-nuke-quickreview'>here</a>.
 
     </div>
@@ -137,69 +141,89 @@
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
 
       
-      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
-        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href="#">tk-nuke-quickreview</a>
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="#">tk-nuke-quickreview</a>
+        
       </nav>
 
 
-      
       <div class="wy-nav-content">
+        
         <div class="rst-content">
+        
           
 
- 
+
+
+
+
+
+
+
+
+
+
+
 
 
 
 <div role="navigation" aria-label="breadcrumbs navigation">
+
   <ul class="wy-breadcrumbs">
-    <li><a href="#">Docs</a> &raquo;</li>
-      
-    <li>Shotgun Nuke Quickreview API reference, v1.0.3</li>
+    
+      <li><a href="#">Docs</a> &raquo;</li>
+        
+      <li>Shotgun Nuke Quickreview API reference, v1.1.0</li>
+    
+    
       <li class="wy-breadcrumbs-aside">
         
-          
+            
         
       </li>
+    
   </ul>
+
+  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
   <div class="section" id="shotgun-nuke-quickreview-api-reference-release">
-<h1>Shotgun Nuke Quickreview API reference, v1.0.3<a class="headerlink" href="#shotgun-nuke-quickreview-api-reference-release" title="Permalink to this headline">¶</a></h1>
-<p>The <code class="docutils literal"><span class="pre">tk-nuke-quickreview</span></code> app adds a custom gizmo to the shotgun node menu in Nuke.</p>
-<p>Via a user interface, the user can create a Shotgun <code class="docutils literal"><span class="pre">Version</span></code>.</p>
+<h1>Shotgun Nuke Quickreview API reference, v1.1.0<a class="headerlink" href="#shotgun-nuke-quickreview-api-reference-release" title="Permalink to this headline">¶</a></h1>
+<p>The <code class="docutils literal notranslate"><span class="pre">tk-nuke-quickreview</span></code> app adds a custom gizmo to the shotgun node menu in Nuke.</p>
+<p>Via a user interface, the user can create a Shotgun <code class="docutils literal notranslate"><span class="pre">Version</span></code>.</p>
 <p>The following items are configurable via the UI:</p>
 <ul class="simple">
-<li>The name of the Version.</li>
-<li>The entity link and task that should be associated with the Version.</li>
-<li>Description.</li>
-<li>Frame range to submit.</li>
-<li>Whether to add the created Version to a playlist.</li>
+<li><p>The name of the Version.</p></li>
+<li><p>The entity link and task that should be associated with the Version.</p></li>
+<li><p>Description.</p></li>
+<li><p>Frame range to submit.</p></li>
+<li><p>Whether to add the created Version to a playlist.</p></li>
 </ul>
 <p>During the submission process several things happen:</p>
 <ul class="simple">
-<li>A quicktime file with slates and burnins is rendered out by Nuke</li>
-<li>A Shotgun Version entity is created</li>
-<li>The quicktime is uploaded to Shotgun and deleted from disk.</li>
+<li><p>A quicktime file with slates and burnins is rendered out by Nuke</p></li>
+<li><p>A Shotgun Version entity is created</p></li>
+<li><p>The quicktime is uploaded to Shotgun and deleted from disk.</p></li>
 </ul>
 <p>Several aspects of the process are customizable via the following Hooks:</p>
 <div class="section" id="controlling-naming-and-formatting">
 <h2>Controlling naming and formatting<a class="headerlink" href="#controlling-naming-and-formatting" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="tk_nuke_quickreview.base_hooks.ReviewSettings">
-<em class="property">class </em><code class="descclassname">tk_nuke_quickreview.base_hooks.</code><code class="descname">ReviewSettings</code><span class="sig-paren">(</span><em>parent</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tk_nuke_quickreview/base_hooks/settings.html#ReviewSettings"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tk_nuke_quickreview.base_hooks.ReviewSettings" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">tk_nuke_quickreview.base_hooks.</code><code class="sig-name descname">ReviewSettings</code><span class="sig-paren">(</span><em class="sig-param">parent</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tk_nuke_quickreview/base_hooks/settings.html#ReviewSettings"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tk_nuke_quickreview.base_hooks.ReviewSettings" title="Permalink to this definition">¶</a></dt>
 <dd><p>This hook allows a user to customize and override default metadata, default
 values as well as controlling the format for the uploaded media.</p>
 <dl class="method">
 <dt id="tk_nuke_quickreview.base_hooks.ReviewSettings.get_burnins_and_slate">
-<code class="descname">get_burnins_and_slate</code><span class="sig-paren">(</span><em>sg_version_name</em>, <em>context</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tk_nuke_quickreview/base_hooks/settings.html#ReviewSettings.get_burnins_and_slate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tk_nuke_quickreview.base_hooks.ReviewSettings.get_burnins_and_slate" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_burnins_and_slate</code><span class="sig-paren">(</span><em class="sig-param">sg_version_name</em>, <em class="sig-param">context</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tk_nuke_quickreview/base_hooks/settings.html#ReviewSettings.get_burnins_and_slate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tk_nuke_quickreview.base_hooks.ReviewSettings.get_burnins_and_slate" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the burnins and slates that should be rendered into the review submission.</p>
 <p>Should return a dictionary with the following keys and format:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">{</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
     <span class="s2">&quot;slate&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;Name: lighting.v003.nk&quot;</span><span class="p">,</span> <span class="s2">&quot;Date: 12 October 2001&quot;</span><span class="p">,</span> <span class="s2">&quot;...&quot;</span><span class="p">]</span>
     <span class="s2">&quot;top_right&quot;</span><span class="p">:</span> <span class="s2">&quot;Top right burnin&quot;</span>
     <span class="s2">&quot;top_left&quot;</span><span class="p">:</span> <span class="s2">&quot;Top left burnin&quot;</span>
@@ -208,71 +232,59 @@ values as well as controlling the format for the uploaded media.</p>
 </pre></div>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">The bottom right burn-in is used as a frame counter and is
+<p class="admonition-title">Note</p>
+<p>The bottom right burn-in is used as a frame counter and is
 controlled by the app.</p>
 </div>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>sg_version_name</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; The name of the shotgun review version</li>
-<li><strong>context</strong> (<a class="reference external" href="http://developer.shotgunsoftware.com/tk-core/core.html#sgtk.Context" title="(in tk-core vv0.18.128)"><code class="xref py py-class docutils literal"><span class="pre">Context</span></code></a>) &#8211; The context associated with the version.</li>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sg_version_name</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – The name of the shotgun review version</p></li>
+<li><p><strong>context</strong> (<a class="reference external" href="http://developer.shotgunsoftware.com/tk-core/core.html#sgtk.Context" title="(in tk-core vv0.19.18)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Context</span></code></a>) – The context associated with the version.</p></li>
 </ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">Dictionary with burn-ins and slate strings</p>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Dictionary with burn-ins and slate strings</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="tk_nuke_quickreview.base_hooks.ReviewSettings.get_title">
-<code class="descname">get_title</code><span class="sig-paren">(</span><em>context</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tk_nuke_quickreview/base_hooks/settings.html#ReviewSettings.get_title"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tk_nuke_quickreview.base_hooks.ReviewSettings.get_title" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_title</code><span class="sig-paren">(</span><em class="sig-param">context</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tk_nuke_quickreview/base_hooks/settings.html#ReviewSettings.get_title"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tk_nuke_quickreview.base_hooks.ReviewSettings.get_title" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the title that should be used for the version.
 This value is presented in the UI to the user as a default value
 which can be manually updated.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>context</strong> (<a class="reference external" href="http://developer.shotgunsoftware.com/tk-core/core.html#sgtk.Context" title="(in tk-core vv0.18.128)"><code class="xref py py-class docutils literal"><span class="pre">Context</span></code></a>) &#8211; The context to be associated with the version.</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Version title string.</td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>context</strong> (<a class="reference external" href="http://developer.shotgunsoftware.com/tk-core/core.html#sgtk.Context" title="(in tk-core vv0.19.18)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Context</span></code></a>) – The context to be associated with the version.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Version title string.</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="tk_nuke_quickreview.base_hooks.ReviewSettings.get_resolution">
-<code class="descname">get_resolution</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/tk_nuke_quickreview/base_hooks/settings.html#ReviewSettings.get_resolution"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tk_nuke_quickreview.base_hooks.ReviewSettings.get_resolution" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_resolution</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/tk_nuke_quickreview/base_hooks/settings.html#ReviewSettings.get_resolution"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tk_nuke_quickreview.base_hooks.ReviewSettings.get_resolution" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the resolution that should be used when rendering the quicktime.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">tuple with (width, height)</td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>tuple with (width, height)</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="tk_nuke_quickreview.base_hooks.ReviewSettings.setup_quicktime_node">
-<code class="descname">setup_quicktime_node</code><span class="sig-paren">(</span><em>write_node</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tk_nuke_quickreview/base_hooks/settings.html#ReviewSettings.setup_quicktime_node"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tk_nuke_quickreview.base_hooks.ReviewSettings.setup_quicktime_node" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">setup_quicktime_node</code><span class="sig-paren">(</span><em class="sig-param">write_node</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tk_nuke_quickreview/base_hooks/settings.html#ReviewSettings.setup_quicktime_node"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tk_nuke_quickreview.base_hooks.ReviewSettings.setup_quicktime_node" title="Permalink to this definition">¶</a></dt>
 <dd><p>Allows modifying settings for Quicktime generation.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>write_node</strong> &#8211; The nuke write node used to generate the quicktime that is being uploaded.</td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>write_node</strong> – The nuke write node used to generate the quicktime that is being uploaded.</p>
+</dd>
+</dl>
 </dd></dl>
 
 </dd></dl>
@@ -282,54 +294,46 @@ which can be manually updated.</p>
 <h2>Adding events and automation<a class="headerlink" href="#adding-events-and-automation" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="tk_nuke_quickreview.base_hooks.ReviewEvents">
-<em class="property">class </em><code class="descclassname">tk_nuke_quickreview.base_hooks.</code><code class="descname">ReviewEvents</code><span class="sig-paren">(</span><em>parent</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tk_nuke_quickreview/base_hooks/events.html#ReviewEvents"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tk_nuke_quickreview.base_hooks.ReviewEvents" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">tk_nuke_quickreview.base_hooks.</code><code class="sig-name descname">ReviewEvents</code><span class="sig-paren">(</span><em class="sig-param">parent</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tk_nuke_quickreview/base_hooks/events.html#ReviewEvents"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tk_nuke_quickreview.base_hooks.ReviewEvents" title="Permalink to this definition">¶</a></dt>
 <dd><p>This hook exposes main events in the review workflow, allowing
 for various data injections and post processing.</p>
 <dl class="method">
 <dt id="tk_nuke_quickreview.base_hooks.ReviewEvents.before_version_creation">
-<code class="descname">before_version_creation</code><span class="sig-paren">(</span><em>sg_version_data</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tk_nuke_quickreview/base_hooks/events.html#ReviewEvents.before_version_creation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tk_nuke_quickreview.base_hooks.ReviewEvents.before_version_creation" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">before_version_creation</code><span class="sig-paren">(</span><em class="sig-param">sg_version_data</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tk_nuke_quickreview/base_hooks/events.html#ReviewEvents.before_version_creation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tk_nuke_quickreview.base_hooks.ReviewEvents.before_version_creation" title="Permalink to this definition">¶</a></dt>
 <dd><p>Called before the version entity is created, allowing
 for injections of additional metadata or fields before
 anything has been added to shotgun.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>sg_version_data</strong> (<a class="reference external" href="https://docs.python.org/2/library/stdtypes.html#dict" title="(in Python v2.7)"><em>dict</em></a>) &#8211; Shotgun version dictionary</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Modified Shotgun version dictionary</td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>sg_version_data</strong> (<a class="reference external" href="https://docs.python.org/2/library/stdtypes.html#dict" title="(in Python v2.7)"><em>dict</em></a>) – Shotgun version dictionary</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Modified Shotgun version dictionary</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="tk_nuke_quickreview.base_hooks.ReviewEvents.after_version_creation">
-<code class="descname">after_version_creation</code><span class="sig-paren">(</span><em>sg_version_id</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tk_nuke_quickreview/base_hooks/events.html#ReviewEvents.after_version_creation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tk_nuke_quickreview.base_hooks.ReviewEvents.after_version_creation" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">after_version_creation</code><span class="sig-paren">(</span><em class="sig-param">sg_version_id</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tk_nuke_quickreview/base_hooks/events.html#ReviewEvents.after_version_creation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tk_nuke_quickreview.base_hooks.ReviewEvents.after_version_creation" title="Permalink to this definition">¶</a></dt>
 <dd><p>Called after the version entity has been created, but before
 any media upload has taken place.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>sg_version_id</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; The associated version id</td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>sg_version_id</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) – The associated version id</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="tk_nuke_quickreview.base_hooks.ReviewEvents.after_upload">
-<code class="descname">after_upload</code><span class="sig-paren">(</span><em>sg_version_id</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tk_nuke_quickreview/base_hooks/events.html#ReviewEvents.after_upload"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tk_nuke_quickreview.base_hooks.ReviewEvents.after_upload" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">after_upload</code><span class="sig-paren">(</span><em class="sig-param">sg_version_id</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tk_nuke_quickreview/base_hooks/events.html#ReviewEvents.after_upload"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tk_nuke_quickreview.base_hooks.ReviewEvents.after_upload" title="Permalink to this definition">¶</a></dt>
 <dd><p>Called after the media has been uplaoded to Shotgun.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>sg_version_id</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; The associated version id</td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>sg_version_id</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) – The associated version id</p>
+</dd>
+</dl>
 </dd></dl>
 
 </dd></dl>
@@ -339,6 +343,7 @@ any media upload has taken place.</p>
 
 
            </div>
+           
           </div>
           <footer>
   
@@ -347,7 +352,7 @@ any media upload has taken place.</p>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2018, Autodesk.
+        &copy; Copyright 2021, Autodesk
 
     </p>
   </div> 
@@ -363,35 +368,15 @@ any media upload has taken place.</p>
   
 
 
-  
-
-    <script type="text/javascript">
-        var DOCUMENTATION_OPTIONS = {
-            URL_ROOT:'./',
-            VERSION:'v1.0.3',
-            COLLAPSE_INDEX:false,
-            FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true
-        };
-    </script>
-      <script type="text/javascript" src="_static/jquery.js"></script>
-      <script type="text/javascript" src="_static/underscore.js"></script>
-      <script type="text/javascript" src="_static/doctools.js"></script>
-
-  
-
-  
-  
-    <script type="text/javascript" src="_static/js/theme.js"></script>
-  
-
-  
-  
   <script type="text/javascript">
       jQuery(function () {
-          SphinxRtdTheme.StickyNav.enable();
+          SphinxRtdTheme.Navigation.enable(true);
       });
   </script>
+
+  
+  
+    
   
  
 
