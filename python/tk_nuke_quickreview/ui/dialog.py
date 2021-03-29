@@ -135,7 +135,7 @@ class Ui_Dialog(object):
         Dialog.setTabOrder(self.cancel, self.jump_to_panel)
 
     def retranslateUi(self, Dialog):
-        Dialog.setWindowTitle(QtGui.QApplication.translate("Dialog", "Shotgun Publish", None, QtGui.QApplication.UnicodeUTF8))
+        Dialog.setWindowTitle(QtGui.QApplication.translate("Dialog", "SG Publish", None, QtGui.QApplication.UnicodeUTF8))
         self.version_name_label.setText(QtGui.QApplication.translate("Dialog", "Name:", None, QtGui.QApplication.UnicodeUTF8))
         self.description_label.setText(QtGui.QApplication.translate("Dialog", "Description:", None, QtGui.QApplication.UnicodeUTF8))
         self.frame_range.setText(QtGui.QApplication.translate("Dialog", "Frame Range:", None, QtGui.QApplication.UnicodeUTF8))
