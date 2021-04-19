@@ -34,7 +34,7 @@ class NukeQuickReview(sgtk.platform.Application):
         icon = os.path.join(self.disk_location, "resources", "node_icon.png")
 
         self.engine.register_command(
-            "Shotgun Quick Review", self.create_node, {"type": "node", "icon": icon}
+            "SG Quick Review", self.create_node, {"type": "node", "icon": icon}
         )
 
     @property

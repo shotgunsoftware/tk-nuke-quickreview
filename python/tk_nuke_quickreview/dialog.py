@@ -410,7 +410,7 @@ class Dialog(QtGui.QWidget):
 
         # create in shotgun
         entity = self._bundle.shotgun.create("Version", data)
-        logger.debug("Version created in Shotgun %s" % entity)
+        logger.debug("Version created in SG %s" % entity)
 
         # call post hook
         self._bundle.execute_hook_method(
