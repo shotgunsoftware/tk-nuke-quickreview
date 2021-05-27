@@ -29,7 +29,7 @@ requires_shotgun_fields:
 
 # More verbose description of this item
 display_name: "Quickreview Node"
-description: "A custom Nuke node that creates a quicktime and uploads it to Shotgun for review."
+description: "A custom Nuke node that creates a quicktime and uploads it to ShotGrid for review."
 
 # Required minimum versions for this item to run
 requires_shotgun_version:

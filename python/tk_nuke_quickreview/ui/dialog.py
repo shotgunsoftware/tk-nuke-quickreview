@@ -141,10 +141,10 @@ class Ui_Dialog(object):
         self.frame_range.setText(QtGui.QApplication.translate("Dialog", "Frame Range:", None, QtGui.QApplication.UnicodeUTF8))
         self.frame_range_to.setText(QtGui.QApplication.translate("Dialog", "to", None, QtGui.QApplication.UnicodeUTF8))
         self.label_8.setText(QtGui.QApplication.translate("Dialog", "Version Creation Complete!", None, QtGui.QApplication.UnicodeUTF8))
-        self.jump_to_shotgun.setText(QtGui.QApplication.translate("Dialog", "Show in Shotgun", None, QtGui.QApplication.UnicodeUTF8))
+        self.jump_to_shotgun.setText(QtGui.QApplication.translate("Dialog", "Show in ShotGrid", None, QtGui.QApplication.UnicodeUTF8))
         self.jump_to_panel.setText(QtGui.QApplication.translate("Dialog", "Show in Panel", None, QtGui.QApplication.UnicodeUTF8))
         self.cancel.setText(QtGui.QApplication.translate("Dialog", "Cancel", None, QtGui.QApplication.UnicodeUTF8))
-        self.submit.setText(QtGui.QApplication.translate("Dialog", "Upload to Shotgun", None, QtGui.QApplication.UnicodeUTF8))
+        self.submit.setText(QtGui.QApplication.translate("Dialog", "Upload to ShotGrid", None, QtGui.QApplication.UnicodeUTF8))
 
 from ..qtwidgets import ContextWidget
 from . import resources_rc

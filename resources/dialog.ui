@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Shotgun Publish</string>
+   <string>ShotGrid Publish</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_2">
    <item>
@@ -199,7 +199,7 @@
            <item>
             <widget class="QPushButton" name="jump_to_shotgun">
              <property name="text">
-              <string>Show in Shotgun</string>
+              <string>Show in ShotGrid</string>
              </property>
             </widget>
            </item>
@@ -289,7 +289,7 @@
      <item>
       <widget class="QPushButton" name="submit">
        <property name="text">
-        <string>Upload to Shotgun</string>
+        <string>Upload to ShotGrid</string>
        </property>
       </widget>
      </item>
