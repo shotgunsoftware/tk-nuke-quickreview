@@ -339,7 +339,7 @@ class Dialog(QtGui.QWidget):
         :param shotgun: Shotgun API instance
         :param: parameter dictionary
         """
-        logger.debug("Uploading movie to Shotgun...")
+        logger.debug("Uploading movie to ShotGrid...")
         try:
             shotgun.upload(
                 "Version", data["version_id"], data["file_name"], "sg_uploaded_movie"
