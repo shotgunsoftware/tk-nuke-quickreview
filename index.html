@@ -7,10 +7,11 @@
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  
+  <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Shotgun Nuke Quickreview API reference, v1.1.0 &mdash; tk-nuke-quickreview v1.1.0 documentation</title>
+  <title>Shotgun Nuke Quickreview API reference, v1.2.0 &mdash; tk-nuke-quickreview v1.2.0 documentation</title>
   
 
   
@@ -49,7 +50,7 @@
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
           
-    <a href='http://developer.shotgunsoftware.com'>
+    <a href='http://developer.shotgridsoftware.com'>
     
         <img style='width: 191px;
                 height: 60px;
@@ -93,7 +94,7 @@
             
               <!-- Local TOC -->
               <div class="local-toc"><ul>
-<li><a class="reference internal" href="#">Shotgun Nuke Quickreview API reference, v1.1.0</a><ul>
+<li><a class="reference internal" href="#">Shotgun Nuke Quickreview API reference, v1.2.0</a><ul>
 <li><a class="reference internal" href="#controlling-naming-and-formatting">Controlling naming and formatting</a></li>
 <li><a class="reference internal" href="#adding-events-and-automation">Adding events and automation</a></li>
 </ul>
@@ -121,12 +122,12 @@
                              text-decoration: underline; }
     </style>
 
-    <b>tk-nuke-quickreview</b> v1.1.0.<br>
+    <b>tk-nuke-quickreview</b> v1.2.0.<br>
     
         This documentation is part of the Shotgun Pipeline Toolkit.
     
     For more information, please visit
-    <a class=custom_post_menu href='https://support.shotgunsoftware.com/home'>Shotgun Support</a>.
+    <a class=custom_post_menu href='https://support.shotgridsoftware.com/home'>Shotgun Support</a>.
     The code associated with this documentation can be found
     <a class=custom_post_menu href='https://github.com/shotgunsoftware/tk-nuke-quickreview'>here</a>.
 
@@ -175,7 +176,7 @@
     
       <li><a href="#">Docs</a> &raquo;</li>
         
-      <li>Shotgun Nuke Quickreview API reference, v1.1.0</li>
+      <li>Shotgun Nuke Quickreview API reference, v1.2.0</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -192,8 +193,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="shotgun-nuke-quickreview-api-reference-release">
-<h1>Shotgun Nuke Quickreview API reference, v1.1.0<a class="headerlink" href="#shotgun-nuke-quickreview-api-reference-release" title="Permalink to this headline">¶</a></h1>
+  <section id="shotgun-nuke-quickreview-api-reference-release">
+<h1>Shotgun Nuke Quickreview API reference, v1.2.0<a class="headerlink" href="#shotgun-nuke-quickreview-api-reference-release" title="Permalink to this headline">¶</a></h1>
 <p>The <code class="docutils literal notranslate"><span class="pre">tk-nuke-quickreview</span></code> app adds a custom gizmo to the shotgun node menu in Nuke.</p>
 <p>Via a user interface, the user can create a Shotgun <code class="docutils literal notranslate"><span class="pre">Version</span></code>.</p>
 <p>The following items are configurable via the UI:</p>
@@ -211,7 +212,7 @@
 <li><p>The quicktime is uploaded to Shotgun and deleted from disk.</p></li>
 </ul>
 <p>Several aspects of the process are customizable via the following Hooks:</p>
-<div class="section" id="controlling-naming-and-formatting">
+<section id="controlling-naming-and-formatting">
 <h2>Controlling naming and formatting<a class="headerlink" href="#controlling-naming-and-formatting" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="tk_nuke_quickreview.base_hooks.ReviewSettings">
@@ -240,7 +241,7 @@ controlled by the app.</p>
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>sg_version_name</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – The name of the shotgun review version</p></li>
-<li><p><strong>context</strong> (<a class="reference external" href="http://developer.shotgunsoftware.com/tk-core/core.html#sgtk.Context" title="(in tk-core vv0.19.18)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Context</span></code></a>) – The context associated with the version.</p></li>
+<li><p><strong>context</strong> (<a class="reference external" href="http://developer.shotgridsoftware.com/tk-core/core.html#sgtk.Context" title="(in tk-core vv0.20.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Context</span></code></a>) – The context associated with the version.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -257,7 +258,7 @@ This value is presented in the UI to the user as a default value
 which can be manually updated.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>context</strong> (<a class="reference external" href="http://developer.shotgunsoftware.com/tk-core/core.html#sgtk.Context" title="(in tk-core vv0.19.18)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Context</span></code></a>) – The context to be associated with the version.</p>
+<dd class="field-odd"><p><strong>context</strong> (<a class="reference external" href="http://developer.shotgridsoftware.com/tk-core/core.html#sgtk.Context" title="(in tk-core vv0.20.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Context</span></code></a>) – The context to be associated with the version.</p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>Version title string.</p>
@@ -289,8 +290,8 @@ which can be manually updated.</p>
 
 </dd></dl>
 
-</div>
-<div class="section" id="adding-events-and-automation">
+</section>
+<section id="adding-events-and-automation">
 <h2>Adding events and automation<a class="headerlink" href="#adding-events-and-automation" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="tk_nuke_quickreview.base_hooks.ReviewEvents">
@@ -338,8 +339,8 @@ any media upload has taken place.</p>
 
 </dd></dl>
 
-</div>
-</div>
+</section>
+</section>
 
 
            </div>
