@@ -12,8 +12,6 @@
 
 PYTHON_BASE="/Applications/Shotgun.app/Contents/Resources/Python"
 
-# Remove any problematic profiles from pngs.
-for f in *.png; do mogrify $f; done
 
 # Helper functions to build UI files
 function build_qt {
