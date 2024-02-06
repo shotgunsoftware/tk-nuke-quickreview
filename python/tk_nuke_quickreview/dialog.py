@@ -339,7 +339,7 @@ class Dialog(QtGui.QWidget):
         :param shotgun: Shotgun API instance
         :param: parameter dictionary
         """
-        logger.debug("Uploading movie to ShotGrid...")
+        logger.debug("Uploading movie to Flow Production Tracking...")
         try:
             shotgun.upload(
                 "Version", data["version_id"], data["file_name"], "sg_uploaded_movie"
@@ -410,7 +410,7 @@ class Dialog(QtGui.QWidget):
 
         # create in shotgun
         entity = self._bundle.shotgun.create("Version", data)
-        logger.debug("Version created in SG %s" % entity)
+        logger.debug("Version created in PTR %s" % entity)
 
         # call post hook
         self._bundle.execute_hook_method(
