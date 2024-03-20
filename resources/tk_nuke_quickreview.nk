@@ -2,17 +2,17 @@ set cut_paste_input [stack 0]
 version 9.0 v6
 push $cut_paste_input
 Group {
- name ShotGridQuickReview
+ name FlowProductionTrackingQuickReview
  note_font Verdana
  selected true
  xpos -338
  ypos -49
  mapsize {0.15 0.15}
- addUserKnob {20 tanktab l "ShotGrid Review"}
+ addUserKnob {20 tanktab l "Flow Production Tracking Review"}
  addUserKnob {26 ""}
- addUserKnob {26 "" l "" +STARTLINE T "\nClick to create a Version and upload it to ShotGrid."}
+ addUserKnob {26 "" l "" +STARTLINE T "\nClick to create a Version and upload it to Flow Production Tracking."}
  addUserKnob {26 ""}
- addUserKnob {22 "" l "Upload..." T "# have to gracefully support the case when \n# Sgtk is not in the system at all or when \n# running an incompatible version of Sgtk.\nimport nuke\ntry:\n  app = nuke.tk_nuke_quickreview\n  fn = app.create_review\nexcept Exception as e:\n  nuke.warning(\"Could not render ShotGrid Quickreview! Most likely Toolkit is not currently active. Message: %s\" % e)\nelse:\n  fn(nuke.thisNode())\n\n" +STARTLINE}
+ addUserKnob {22 "" l "Upload..." T "# have to gracefully support the case when \n# Sgtk is not in the system at all or when \n# running an incompatible version of Sgtk.\nimport nuke\ntry:\n  app = nuke.tk_nuke_quickreview\n  fn = app.create_review\nexcept Exception as e:\n  nuke.warning(\"Could not render Flow Production Tracking Quickreview! Most likely Toolkit is not currently active. Message: %s\" % e)\nelse:\n  fn(nuke.thisNode())\n\n" +STARTLINE}
  addUserKnob {26 ""}
 }
  Input {
