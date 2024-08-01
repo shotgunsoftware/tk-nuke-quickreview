@@ -226,7 +226,3 @@ class Ui_Dialog(object):
         self.cancel.setText(QCoreApplication.translate("Dialog", u"Cancel", None))
         self.submit.setText(QCoreApplication.translate("Dialog", u"Upload to Flow Production Tracking", None))
     # retranslateUi
-
-Error: C:\Users\chaucae\Documents\projects\tk-nuke-quickreview\resources\dialog.ui: Warning: Z-order assignment: '' is not a valid widget.
-
-while executing 'c:\users\chaucae\documents\projects\tk-core\.venv\lib\site-packages\PySide2\uic -g python -g python --from-imports C:\Users\chaucae\Documents\projects\tk-nuke-quickreview\resources/dialog.ui'
