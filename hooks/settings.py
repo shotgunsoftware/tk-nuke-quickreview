@@ -9,12 +9,10 @@
 # not expressly granted therein are reserved by Shotgun Software Inc.
 
 import sgtk
-import sys
 import os
 import nuke
 import datetime
 
-from tank_vendor import six
 
 HookBaseClass = sgtk.get_hook_baseclass()
 
@@ -109,7 +107,6 @@ class Settings(HookBaseClass):
         # now try to see if we are in a normal work file
         # in that case deduce the name from it
         current_scene_path = nuke.root().name()
-        current_scene_path = six.ensure_str(current_scene_path)
 
         if current_scene_path and current_scene_path != "Root":
             current_scene_path = current_scene_path.replace("/", os.path.sep)
