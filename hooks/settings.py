@@ -107,7 +107,7 @@ class Settings(HookBaseClass):
 
         # now try to see if we are in a normal work file
         # in that case deduce the name from it
-        current_scene_path = str(nuke.root().name())
+        current_scene_path = nuke.root().name()
 
         if current_scene_path and current_scene_path != "Root":
             current_scene_path = current_scene_path.replace("/", os.path.sep)

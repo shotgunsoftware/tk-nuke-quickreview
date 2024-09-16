@@ -351,12 +351,10 @@ class Dialog(QtGui.QWidget):
         """
         Carry out the render and upload.
         """
-        # get inputs - these come back as unicode so make sure convert to utf-8
+        # get inputs
         version_name = self.ui.version_name.text()
-        version_name = str(version_name)
 
         description = self.ui.description.toPlainText()
-        description = str(description)
 
         # set metadata
         self._setup_formatting(version_name)
