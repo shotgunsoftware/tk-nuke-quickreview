@@ -1,10 +1,10 @@
-Shotgun Nuke Quickreview API reference, |release|
+Flow Production Tracking Nuke Quickreview API reference, |release|
 ###################################################
 
 
-The ``tk-nuke-quickreview`` app adds a custom gizmo to the shotgun node menu in Nuke.
+The ``tk-nuke-quickreview`` app adds a custom gizmo to the Flow Production Tracking node menu in Nuke.
 
-Via a user interface, the user can create a Shotgun ``Version``.
+Via a user interface, the user can create a Flow Production Tracking ``Version``.
 
 The following items are configurable via the UI:
 
@@ -17,8 +17,8 @@ The following items are configurable via the UI:
 During the submission process several things happen:
 
 - A quicktime file with slates and burnins is rendered out by Nuke
-- A Shotgun Version entity is created
-- The quicktime is uploaded to Shotgun and deleted from disk.
+- A Flow Production Tracking Version entity is created
+- The quicktime is uploaded to Flow Production Tracking and deleted from disk.
 
 Several aspects of the process are customizable via the following Hooks:
 
