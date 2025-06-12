@@ -36,7 +36,7 @@ class ReviewSettings(HookBaseClass):
             The bottom right burn-in is used as a frame counter and is
             controlled by the app.
 
-        :param str sg_version_name: The name of the shotgun review version
+        :param str sg_version_name: The name of the Flow Production Tracking review version
         :param context: The context associated with the version.
         :type context: :class:`~sgtk:sgtk.Context`
         :returns: Dictionary with burn-ins and slate strings
