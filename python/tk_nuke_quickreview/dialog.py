@@ -30,7 +30,7 @@ class Dialog(QtGui.QWidget):
     Main dialog window for the App
     """
 
-    (DATA_ENTRY_UI, UPLOAD_COMPLETE_UI) = range(2)
+    DATA_ENTRY_UI, UPLOAD_COMPLETE_UI = range(2)
 
     def __init__(self, nuke_review_node, parent=None):
         """
@@ -246,7 +246,7 @@ class Dialog(QtGui.QWidget):
         import nuke
 
         # setup quicktime output resolution
-        (width, height) = self._bundle.execute_hook_method(
+        width, height = self._bundle.execute_hook_method(
             "settings_hook",
             "get_resolution",
             base_class=self._bundle.base_hooks.ReviewSettings,
