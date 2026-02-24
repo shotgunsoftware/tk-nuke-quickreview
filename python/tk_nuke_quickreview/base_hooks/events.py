@@ -23,10 +23,10 @@ class ReviewEvents(HookBaseClass):
         """
         Called before the version entity is created, allowing
         for injections of additional metadata or fields before
-        anything has been added to shotgun.
+        anything has been added to Flow Production Tracking.
 
-        :param dict sg_version_data: Shotgun version dictionary
-        :returns: Modified Shotgun version dictionary
+        :param dict sg_version_data: FPT version dictionary
+        :returns: Modified FPT version dictionary
         """
         raise NotImplementedError
 
@@ -41,7 +41,7 @@ class ReviewEvents(HookBaseClass):
 
     def after_upload(self, sg_version_id):
         """
-        Called after the media has been uplaoded to Shotgun.
+        Called after the media has been uploaded to FPT.
 
         :param int sg_version_id: The associated version id
         """

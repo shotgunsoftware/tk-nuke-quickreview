@@ -13,7 +13,6 @@ import os
 import nuke
 import datetime
 
-
 HookBaseClass = sgtk.get_hook_baseclass()
 
 
