@@ -12,6 +12,7 @@ import os
 import sgtk
 import tempfile
 import datetime
+import sgtk.platform
 from sgtk.platform.qt import QtCore, QtGui
 
 from .ui.dialog import Ui_Dialog
@@ -198,8 +199,16 @@ class Dialog(QtGui.QWidget):
         :param str sg_version_name: Name of the version.
         """
         # set the fonts for all text fields
+        # Use the canonical Open Sans copy that ships with tk-core rather than
+        # a bundled duplicate.  sgtk.platform.__file__ resolves to
+        # tank/platform/__init__.py, so the fonts live one directory up in
+        # qt/fonts/OpenSans/.
         font = os.path.join(
-            self._bundle.disk_location, "resources", "OpenSans-Regular.ttf"
+            os.path.dirname(sgtk.platform.__file__),
+            "qt",
+            "fonts",
+            "OpenSans",
+            "OpenSans-Regular.ttf",
         )
         font = font.replace(os.sep, "/")
         self._group_node.node("top_left_text")["font"].setValue(font)
