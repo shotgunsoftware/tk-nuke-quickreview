@@ -198,25 +198,6 @@ class Dialog(QtGui.QWidget):
 
         :param str sg_version_name: Name of the version.
         """
-        # set the fonts for all text fields
-        # Use the canonical Open Sans copy that ships with tk-core rather than
-        # a bundled duplicate.  sgtk.platform.__file__ resolves to
-        # tank/platform/__init__.py, so the fonts live one directory up in
-        # qt/fonts/OpenSans/.
-        font = os.path.join(
-            os.path.dirname(sgtk.platform.__file__),
-            "qt",
-            "fonts",
-            "OpenSans",
-            "OpenSans-Regular.ttf",
-        )
-        font = font.replace(os.sep, "/")
-        self._group_node.node("top_left_text")["font"].setValue(font)
-        self._group_node.node("top_right_text")["font"].setValue(font)
-        self._group_node.node("bottom_left_text")["font"].setValue(font)
-        self._group_node.node("framecounter")["font"].setValue(font)
-        self._group_node.node("slate_info")["font"].setValue(font)
-
         # get burnins and slate info from hook
         fields_dict = self._bundle.execute_hook_method(
             "settings_hook",
