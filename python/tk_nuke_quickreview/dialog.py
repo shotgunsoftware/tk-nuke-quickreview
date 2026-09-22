@@ -12,7 +12,6 @@ import os
 import sgtk
 import tempfile
 import datetime
-import sgtk.platform
 from sgtk.platform.qt import QtCore, QtGui
 
 from .ui.dialog import Ui_Dialog
