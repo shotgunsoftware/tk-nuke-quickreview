@@ -197,17 +197,6 @@ class Dialog(QtGui.QWidget):
 
         :param str sg_version_name: Name of the version.
         """
-        # set the fonts for all text fields
-        font = os.path.join(
-            self._bundle.disk_location, "resources", "OpenSans-Regular.ttf"
-        )
-        font = font.replace(os.sep, "/")
-        self._group_node.node("top_left_text")["font"].setValue(font)
-        self._group_node.node("top_right_text")["font"].setValue(font)
-        self._group_node.node("bottom_left_text")["font"].setValue(font)
-        self._group_node.node("framecounter")["font"].setValue(font)
-        self._group_node.node("slate_info")["font"].setValue(font)
-
         # get burnins and slate info from hook
         fields_dict = self._bundle.execute_hook_method(
             "settings_hook",
