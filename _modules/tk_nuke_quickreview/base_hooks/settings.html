@@ -5,10 +5,11 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>tk_nuke_quickreview.base_hooks.settings &mdash; tk-nuke-quickreview v1.3.2 documentation</title>
+  <title>tk_nuke_quickreview.base_hooks.settings &mdash; tk-nuke-quickreview v1.4.0 documentation</title>
       <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/graphviz.css" type="text/css" />
+    <link rel="shortcut icon" href="../../../_static/favicon.ico"/>
   <!--[if lt IE 9]>
     <script src="../../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
@@ -76,7 +77,7 @@
                              text-decoration: underline; }
     </style>
 
-    <b>tk-nuke-quickreview</b> v1.3.2.<br>
+    <b>tk-nuke-quickreview</b> v1.4.0.<br>
     
         This documentation is part of the Flow Production Tracking.
     
@@ -124,49 +125,49 @@
 <span class="c1">#</span>
 <span class="c1"># CONFIDENTIAL AND PROPRIETARY</span>
 <span class="c1">#</span>
-<span class="c1"># This work is provided &quot;AS IS&quot; and subject to the Shotgun Pipeline Toolkit</span>
+<span class="c1"># This work is provided "AS IS" and subject to the Shotgun Pipeline Toolkit</span>
 <span class="c1"># Source Code License included in this distribution package. See LICENSE.</span>
 <span class="c1"># By accessing, using, copying or modifying this work you indicate your</span>
 <span class="c1"># agreement to the Shotgun Pipeline Toolkit Source Code License. All rights</span>
 <span class="c1"># not expressly granted therein are reserved by Shotgun Software Inc.</span>
 
-<span class="kn">import</span> <span class="nn">sgtk</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">sgtk</span>
 
 <span class="n">HookBaseClass</span> <span class="o">=</span> <span class="n">sgtk</span><span class="o">.</span><span class="n">get_hook_baseclass</span><span class="p">()</span>
 
 
-<div class="viewcode-block" id="ReviewSettings"><a class="viewcode-back" href="../../../index.html#tk_nuke_quickreview.base_hooks.ReviewSettings">[docs]</a><span class="k">class</span> <span class="nc">ReviewSettings</span><span class="p">(</span><span class="n">HookBaseClass</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<div class="viewcode-block" id="ReviewSettings"><a class="viewcode-back" href="../../../index.html#tk_nuke_quickreview.base_hooks.ReviewSettings">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">ReviewSettings</span><span class="p">(</span><span class="n">HookBaseClass</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    This hook allows a user to customize and override default metadata, default</span>
 <span class="sd">    values as well as controlling the format for the uploaded media.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
-<div class="viewcode-block" id="ReviewSettings.get_burnins_and_slate"><a class="viewcode-back" href="../../../index.html#tk_nuke_quickreview.base_hooks.ReviewSettings.get_burnins_and_slate">[docs]</a>    <span class="k">def</span> <span class="nf">get_burnins_and_slate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sg_version_name</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<div class="viewcode-block" id="ReviewSettings.get_burnins_and_slate"><a class="viewcode-back" href="../../../index.html#tk_nuke_quickreview.base_hooks.ReviewSettings.get_burnins_and_slate">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">get_burnins_and_slate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sg_version_name</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Returns the burnins and slates that should be rendered into the review submission.</span>
 
 <span class="sd">        Should return a dictionary with the following keys and format::</span>
 
 <span class="sd">            {</span>
-<span class="sd">                &quot;slate&quot;: [&quot;Name: lighting.v003.nk&quot;, &quot;Date: 12 October 2001&quot;, &quot;...&quot;]</span>
-<span class="sd">                &quot;top_right&quot;: &quot;Top right burnin&quot;</span>
-<span class="sd">                &quot;top_left&quot;: &quot;Top left burnin&quot;</span>
-<span class="sd">                &quot;bottom_left&quot;: &quot;Bottom left burnin&quot;</span>
+<span class="sd">                "slate": ["Name: lighting.v003.nk", "Date: 12 October 2001", "..."]</span>
+<span class="sd">                "top_right": "Top right burnin"</span>
+<span class="sd">                "top_left": "Top left burnin"</span>
+<span class="sd">                "bottom_left": "Bottom left burnin"</span>
 <span class="sd">            }</span>
 
 <span class="sd">        .. note::</span>
 <span class="sd">            The bottom right burn-in is used as a frame counter and is</span>
 <span class="sd">            controlled by the app.</span>
 
-<span class="sd">        :param str sg_version_name: The name of the shotgun review version</span>
+<span class="sd">        :param str sg_version_name: The name of the FPT review version</span>
 <span class="sd">        :param context: The context associated with the version.</span>
 <span class="sd">        :type context: :class:`~sgtk:sgtk.Context`</span>
 <span class="sd">        :returns: Dictionary with burn-ins and slate strings</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
 
-<div class="viewcode-block" id="ReviewSettings.get_title"><a class="viewcode-back" href="../../../index.html#tk_nuke_quickreview.base_hooks.ReviewSettings.get_title">[docs]</a>    <span class="k">def</span> <span class="nf">get_title</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<div class="viewcode-block" id="ReviewSettings.get_title"><a class="viewcode-back" href="../../../index.html#tk_nuke_quickreview.base_hooks.ReviewSettings.get_title">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">get_title</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Returns the title that should be used for the version.</span>
 <span class="sd">        This value is presented in the UI to the user as a default value</span>
 <span class="sd">        which can be manually updated.</span>
@@ -174,23 +175,23 @@
 <span class="sd">        :param context: The context to be associated with the version.</span>
 <span class="sd">        :type context: :class:`~sgtk:sgtk.Context`</span>
 <span class="sd">        :returns: Version title string.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
 
-<div class="viewcode-block" id="ReviewSettings.get_resolution"><a class="viewcode-back" href="../../../index.html#tk_nuke_quickreview.base_hooks.ReviewSettings.get_resolution">[docs]</a>    <span class="k">def</span> <span class="nf">get_resolution</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<div class="viewcode-block" id="ReviewSettings.get_resolution"><a class="viewcode-back" href="../../../index.html#tk_nuke_quickreview.base_hooks.ReviewSettings.get_resolution">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">get_resolution</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Returns the resolution that should be used when rendering the quicktime.</span>
 
 <span class="sd">        :returns: tuple with (width, height)</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
 
-<div class="viewcode-block" id="ReviewSettings.setup_quicktime_node"><a class="viewcode-back" href="../../../index.html#tk_nuke_quickreview.base_hooks.ReviewSettings.setup_quicktime_node">[docs]</a>    <span class="k">def</span> <span class="nf">setup_quicktime_node</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">write_node</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<div class="viewcode-block" id="ReviewSettings.setup_quicktime_node"><a class="viewcode-back" href="../../../index.html#tk_nuke_quickreview.base_hooks.ReviewSettings.setup_quicktime_node">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">setup_quicktime_node</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">write_node</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Allows modifying settings for Quicktime generation.</span>
 
 <span class="sd">        :param write_node: The nuke write node used to generate the quicktime that is being uploaded.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span></div></div>
 </pre></div>
 
@@ -201,7 +202,7 @@
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2024, Autodesk.</p>
+    <p>&#169; Copyright 2026, Autodesk.</p>
   </div>
 
    

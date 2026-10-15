@@ -6,10 +6,11 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Shotgun Nuke Quickreview API reference, v1.3.2 &mdash; tk-nuke-quickreview v1.3.2 documentation</title>
+  <title>Flow Production Tracking Nuke Quickreview API reference, v1.4.0 &mdash; tk-nuke-quickreview v1.4.0 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="_static/graphviz.css" type="text/css" />
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
@@ -58,7 +59,7 @@
     
               <!-- Local TOC -->
               <div class="local-toc"><ul>
-<li><a class="reference internal" href="#">Shotgun Nuke Quickreview API reference, v1.3.2</a><ul>
+<li><a class="reference internal" href="#">Flow Production Tracking Nuke Quickreview API reference, v1.4.0</a><ul>
 <li><a class="reference internal" href="#controlling-naming-and-formatting">Controlling naming and formatting</a><ul>
 <li><a class="reference internal" href="#tk_nuke_quickreview.base_hooks.ReviewSettings"><code class="docutils literal notranslate"><span class="pre">ReviewSettings</span></code></a><ul>
 <li><a class="reference internal" href="#tk_nuke_quickreview.base_hooks.ReviewSettings.get_burnins_and_slate"><code class="docutils literal notranslate"><span class="pre">ReviewSettings.get_burnins_and_slate()</span></code></a></li>
@@ -101,7 +102,7 @@
                              text-decoration: underline; }
     </style>
 
-    <b>tk-nuke-quickreview</b> v1.3.2.<br>
+    <b>tk-nuke-quickreview</b> v1.4.0.<br>
     
         This documentation is part of the Flow Production Tracking.
     
@@ -134,7 +135,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="#" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">Shotgun Nuke Quickreview API reference, v1.3.2</li>
+      <li class="breadcrumb-item active">Flow Production Tracking Nuke Quickreview API reference, v1.4.0</li>
       <li class="wy-breadcrumbs-aside">
       </li>
   </ul>
@@ -143,10 +144,10 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="shotgun-nuke-quickreview-api-reference-release">
-<h1>Shotgun Nuke Quickreview API reference, v1.3.2<a class="headerlink" href="#shotgun-nuke-quickreview-api-reference-release" title="Permalink to this heading"></a></h1>
-<p>The <code class="docutils literal notranslate"><span class="pre">tk-nuke-quickreview</span></code> app adds a custom gizmo to the shotgun node menu in Nuke.</p>
-<p>Via a user interface, the user can create a Shotgun <code class="docutils literal notranslate"><span class="pre">Version</span></code>.</p>
+  <section id="flow-production-tracking-nuke-quickreview-api-reference-release">
+<h1>Flow Production Tracking Nuke Quickreview API reference, v1.4.0<a class="headerlink" href="#flow-production-tracking-nuke-quickreview-api-reference-release" title="Permalink to this heading"></a></h1>
+<p>The <code class="docutils literal notranslate"><span class="pre">tk-nuke-quickreview</span></code> app adds a custom gizmo to the Flow Production Tracking node menu in Nuke.</p>
+<p>Via a user interface, the user can create a Flow Production Tracking <code class="docutils literal notranslate"><span class="pre">Version</span></code>.</p>
 <p>The following items are configurable via the UI:</p>
 <ul class="simple">
 <li><p>The name of the Version.</p></li>
@@ -158,8 +159,8 @@
 <p>During the submission process several things happen:</p>
 <ul class="simple">
 <li><p>A quicktime file with slates and burnins is rendered out by Nuke</p></li>
-<li><p>A Shotgun Version entity is created</p></li>
-<li><p>The quicktime is uploaded to Shotgun and deleted from disk.</p></li>
+<li><p>A Flow Production Tracking Version entity is created</p></li>
+<li><p>The quicktime is uploaded to Flow Production Tracking and deleted from disk.</p></li>
 </ul>
 <p>Several aspects of the process are customizable via the following Hooks:</p>
 <section id="controlling-naming-and-formatting">
@@ -175,10 +176,10 @@ values as well as controlling the format for the uploaded media.</p>
 <dd><p>Returns the burnins and slates that should be rendered into the review submission.</p>
 <p>Should return a dictionary with the following keys and format:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
-    <span class="s2">&quot;slate&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;Name: lighting.v003.nk&quot;</span><span class="p">,</span> <span class="s2">&quot;Date: 12 October 2001&quot;</span><span class="p">,</span> <span class="s2">&quot;...&quot;</span><span class="p">]</span>
-    <span class="s2">&quot;top_right&quot;</span><span class="p">:</span> <span class="s2">&quot;Top right burnin&quot;</span>
-    <span class="s2">&quot;top_left&quot;</span><span class="p">:</span> <span class="s2">&quot;Top left burnin&quot;</span>
-    <span class="s2">&quot;bottom_left&quot;</span><span class="p">:</span> <span class="s2">&quot;Bottom left burnin&quot;</span>
+    <span class="s2">"slate"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"Name: lighting.v003.nk"</span><span class="p">,</span> <span class="s2">"Date: 12 October 2001"</span><span class="p">,</span> <span class="s2">"..."</span><span class="p">]</span>
+    <span class="s2">"top_right"</span><span class="p">:</span> <span class="s2">"Top right burnin"</span>
+    <span class="s2">"top_left"</span><span class="p">:</span> <span class="s2">"Top left burnin"</span>
+    <span class="s2">"bottom_left"</span><span class="p">:</span> <span class="s2">"Bottom left burnin"</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -190,8 +191,8 @@ controlled by the app.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>sg_version_name</strong> (<a class="reference external" href="https://docs.python.org/3.9/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – The name of the shotgun review version</p></li>
-<li><p><strong>context</strong> (<a class="reference external" href="https://developers.shotgridsoftware.com/tk-core/core.html#sgtk.Context" title="(in tk-core vv0.21.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Context</span></code></a>) – The context associated with the version.</p></li>
+<li><p><strong>sg_version_name</strong> (<a class="reference external" href="https://docs.python.org/3.9/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – The name of the FPT review version</p></li>
+<li><p><strong>context</strong> (<a class="reference external" href="https://developers.shotgridsoftware.com/tk-core/core.html#sgtk.Context" title="(in tk-core vv0.24.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Context</span></code></a>) – The context associated with the version.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
@@ -208,7 +209,7 @@ This value is presented in the UI to the user as a default value
 which can be manually updated.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>context</strong> (<a class="reference external" href="https://developers.shotgridsoftware.com/tk-core/core.html#sgtk.Context" title="(in tk-core vv0.21.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Context</span></code></a>) – The context to be associated with the version.</p>
+<dd class="field-odd"><p><strong>context</strong> (<a class="reference external" href="https://developers.shotgridsoftware.com/tk-core/core.html#sgtk.Context" title="(in tk-core vv0.24.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Context</span></code></a>) – The context to be associated with the version.</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>Version title string.</p>
@@ -253,13 +254,13 @@ for various data injections and post processing.</p>
 <span class="sig-name descname"><span class="pre">before_version_creation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sg_version_data</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tk_nuke_quickreview/base_hooks/events.html#ReviewEvents.before_version_creation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tk_nuke_quickreview.base_hooks.ReviewEvents.before_version_creation" title="Permalink to this definition"></a></dt>
 <dd><p>Called before the version entity is created, allowing
 for injections of additional metadata or fields before
-anything has been added to shotgun.</p>
+anything has been added to Flow Production Tracking.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>sg_version_data</strong> (<a class="reference external" href="https://docs.python.org/3.9/library/stdtypes.html#dict" title="(in Python v3.9)"><em>dict</em></a>) – Shotgun version dictionary</p>
+<dd class="field-odd"><p><strong>sg_version_data</strong> (<a class="reference external" href="https://docs.python.org/3.9/library/stdtypes.html#dict" title="(in Python v3.9)"><em>dict</em></a>) – FPT version dictionary</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Modified Shotgun version dictionary</p>
+<dd class="field-even"><p>Modified FPT version dictionary</p>
 </dd>
 </dl>
 </dd></dl>
@@ -279,7 +280,7 @@ any media upload has taken place.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="tk_nuke_quickreview.base_hooks.ReviewEvents.after_upload">
 <span class="sig-name descname"><span class="pre">after_upload</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sg_version_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tk_nuke_quickreview/base_hooks/events.html#ReviewEvents.after_upload"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tk_nuke_quickreview.base_hooks.ReviewEvents.after_upload" title="Permalink to this definition"></a></dt>
-<dd><p>Called after the media has been uplaoded to Shotgun.</p>
+<dd><p>Called after the media has been uploaded to FPT.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>sg_version_id</strong> (<a class="reference external" href="https://docs.python.org/3.9/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – The associated version id</p>
@@ -300,7 +301,7 @@ any media upload has taken place.</p>
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2024, Autodesk.</p>
+    <p>&#169; Copyright 2026, Autodesk.</p>
   </div>
 
    
